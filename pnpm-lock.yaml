@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@material-symbols-svg/react':
+        specifier: ^0.8.0
+        version: 0.8.0(react@19.2.4)
       next:
         specifier: 16.2.4
         version: 16.2.4(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -229,6 +232,12 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@material-symbols-svg/react@0.8.0':
+    resolution: {integrity: sha512-8rCMdmN+cnNDZWmkAvkMT3/tVXFQD4lXNWtBaiLK48j2ckj9iRHAZv0hq9IdtEaLrLVMQ6nXIOcrp6WoP7CFKQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@next/env@16.2.4':
     resolution: {integrity: sha512-dKkkOzOSwFYe5RX6y26fZgkSpVAlIOJKQHIiydQcrWH6y/97+RceSOAdjZ14Qa3zLduVUy0TXcn+EiM6t4rPgw==}
@@ -726,6 +735,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@material-symbols-svg/react@0.8.0(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
 
   '@next/env@16.2.4': {}
 
