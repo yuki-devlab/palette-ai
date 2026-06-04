@@ -1,8 +1,6 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
 import { z } from "zod";
-import chromium from "@sparticuz/chromium";
-import { chromium as pw } from "playwright-core";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { setStore } from "@/lib/store";
@@ -19,12 +17,6 @@ export async function POST(req: Request) {
         }
 
         const { mode, input } = await req.json();
-
-        // 🌐 siteモードだけ実データ抽出
-        const siteColors =
-            mode === "site"
-                ? await extractColorsFromSite(input)
-                : [];
 
         const result = await generateText({
             model: openai("gpt-4o-mini"),
@@ -72,55 +64,6 @@ export async function POST(req: Request) {
 }
 
 /**
- * 🌐 PlaywrightでサイトからCSSカラー抽出
- */
-async function extractColorsFromSite(url: string) {
-    if (!url) return [];
-
-    const browser = await pw.launch({
-        args: chromium.args,
-        executablePath: await chromium.executablePath(),
-        headless: true,
-    });
-
-    const page = await browser.newPage();
-
-    try {
-        await page.goto(url, {
-            waitUntil: "networkidle",
-            timeout: 15000,
-        });
-
-        const colors = await page.evaluate(() => {
-            const elements = Array.from(document.querySelectorAll("*"));
-            const colorSet = new Set<string>();
-
-            const isValid = (c: string) =>
-                c &&
-                c !== "rgba(0, 0, 0, 0)" &&
-                c !== "transparent";
-
-            for (const el of elements) {
-                const style = window.getComputedStyle(el);
-
-                if (isValid(style.color)) colorSet.add(style.color);
-                if (isValid(style.backgroundColor)) colorSet.add(style.backgroundColor);
-                if (isValid(style.borderColor)) colorSet.add(style.borderColor);
-            }
-
-            return Array.from(colorSet);
-        });
-
-        return colors.slice(0, 30);
-    } catch (e) {
-        console.error("SITE PARSE ERROR:", e);
-        return [];
-    } finally {
-        await browser.close();
-    }
-}
-
-/**
  * 🎯 プロンプト生成
  */
 function buildPrompt(mode: string, input: any, siteColors: string[]) {
@@ -152,15 +95,6 @@ ${mode}
 ${formatInput(mode, input)}
 
 ---
-
-# モード別ルール
-
-${mode === "site" ? `
-サイトから抽出した色情報:
-${siteColors.length ? siteColors.join(", ") : "なし"}
-
-この色からブランド構造を推定してください。
-` : ""}
 
 ${mode === "impression" ? `
 印象を強く反映してください。

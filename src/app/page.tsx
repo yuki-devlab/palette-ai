@@ -38,18 +38,6 @@ export default function Home() {
                     description="３色のうち、決まっている色だけを入力すると、AIがそれ以外の色を自動生成します。"
                     badge={null}
                 />
-                <LinkCard
-                    url="site"
-                    title="サイトから配色を抽出"
-                    description="参考にしたいサイトのURLを入力すると、AIが自動で配色を抽出します。"
-                    badge={null}
-                />
-                <LinkCard
-                    url="image"
-                    title="画像から配色を抽出"
-                    description="参考にしたい画像を選択すると、Aiが自動で配色を抽出します。"
-                    badge={null}
-                />
             </div>
         </div>
     )
