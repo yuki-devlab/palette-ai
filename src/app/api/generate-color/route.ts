@@ -1,7 +1,8 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
 import { z } from "zod";
-import { chromium } from "playwright";
+import chromium from "@sparticuz/chromium";
+import { chromium as pw } from "playwright-core";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { setStore } from "@/lib/store";
@@ -76,7 +77,9 @@ export async function POST(req: Request) {
 async function extractColorsFromSite(url: string) {
     if (!url) return [];
 
-    const browser = await chromium.launch({
+    const browser = await pw.launch({
+        args: chromium.args,
+        executablePath: await chromium.executablePath(),
         headless: true,
     });
 
