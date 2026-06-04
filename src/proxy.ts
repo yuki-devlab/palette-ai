@@ -4,7 +4,7 @@ export const config = {
     matcher: ["/:path*"],
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
     if (process.env.ENABLE_BASIC_AUTH !== "true") {
         return NextResponse.next();
     }
