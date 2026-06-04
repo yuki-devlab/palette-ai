@@ -27,7 +27,7 @@ export async function POST(req: Request) {
                     accent: z.string(),
                 }),
             }),
-            prompt: buildPrompt(mode, input, siteColors),
+            prompt: buildPrompt(mode, input),
         });
 
         console.log("AI OUTPUT:", result.output);
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 /**
  * 🎯 プロンプト生成
  */
-function buildPrompt(mode: string, input: any, siteColors: string[]) {
+function buildPrompt(mode: string, input: any) {
     return `
 あなたはプロのUIデザイナーです。
 Webサイト用の配色（base / main / accent）を生成してください。
