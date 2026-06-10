@@ -1,31 +1,19 @@
-"use client";
+import { signIn } from "@/lib/auth";
 
-import { login, logout } from "@/lib/login-logout";
-
-export function LoginButton() {
+export default function LoginButton() {
     return (
         <form
-            action={login}
+            action={async () => {
+                "use server";
+                await signIn("google");
+            }}
             className="w-full"
         >
             <button
                 type="submit"
-                className="w-full py-6 [text-box:trim-both_cap_alphabetic] bg-[var(--color-blue)] text-white font-bold rounded-full text-sm hover:bg-blue-400"
+                className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white w-full hover:bg-blue-500"
             >
                 ログイン
-            </button>
-        </form>
-    )
-}
-
-export function LogOutButton() {
-    return (
-        <form action={logout}>
-            <button
-                type="submit"
-                className="p-4 rounded-full bg-[var(--color-blue)] text-white font-bold [text-box:trim-both_cap_alphabetic] text-xs hover:bg-blue-400"
-            >
-                ログアウト
             </button>
         </form>
     )
