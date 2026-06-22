@@ -2,30 +2,32 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { Check as CheckW700 } from "@material-symbols-svg/react/w700";
 import { DarkMode as DarkModeW600 } from "@material-symbols-svg/react/w600";
 import { LightMode as LightModeW600 } from "@material-symbols-svg/react/w600";
 
-const themes = [
-    {
-        value: "light",
-        label: "ライトテーマ",
-    },
-    {
-        value: "dark",
-        label: "ダークテーマ",
-    },
-    {
-        value: "system",
-        label: "システムテーマ",
-    },
-] as const;
-
 export default function ThemeSelector() {
+    const t = useTranslations("sidebar.theme");
+    const { theme, resolvedTheme, setTheme } = useTheme();
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const { theme, resolvedTheme, setTheme } = useTheme();
+
+    const themes = [
+        {
+            value: "light",
+            label: t("light"),
+        },
+        {
+            value: "dark",
+            label: t("dark"),
+        },
+        {
+            value: "system",
+            label: t("system"),
+        },
+    ] as const;
 
     const toggleMenu = () => {
         setMenuIsOpen((prev) => !prev);
