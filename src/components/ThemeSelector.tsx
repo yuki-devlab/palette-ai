@@ -80,7 +80,7 @@ export default function ThemeSelector() {
                 ${
                     menuIsOpen
                         ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-4"
+                        : "opacity-0 pointer-events-none translate-y-4"
                 }
             `}>
                 {themes.map(({ value, label }) => (
