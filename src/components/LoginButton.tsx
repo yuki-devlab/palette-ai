@@ -1,6 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import { signIn } from "@/lib/auth";
 
-export default function LoginButton() {
+export default async function LoginButton() {
+    const t = await getTranslations("sidebar");
+
     return (
         <form
             action={async () => {
@@ -13,7 +16,7 @@ export default function LoginButton() {
                 type="submit"
                 className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white w-full hover:bg-blue-500"
             >
-                ログイン
+                {t("login")}
             </button>
         </form>
     )
