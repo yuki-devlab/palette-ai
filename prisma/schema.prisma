@@ -42,6 +42,7 @@ model User {
     name          String?
     accounts      Account[]
     sessions      Session[]
+    subscriptions Subscription[]
     histories     History[]
     @@map("users")
 }
@@ -52,6 +53,17 @@ model VerificationToken {
     token      String
     @@unique([identifier, token])
     @@map("verification_tokens")
+}
+
+model Subscription {
+    id                   String    @id @default(cuid())
+    userId               String    @unique @map("user_id")
+    stripeCustomerId     String?   @map("stripe_customer_id")
+    stripeSubscriptionId String?   @map("stripe_subscription_id")
+    stripePriceId        String?   @map("stripe_price_id")
+    currentPeriodEnd     DateTime? @map("current_period_end")
+    user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    @@map("subscriptions")
 }
 
 model History {
