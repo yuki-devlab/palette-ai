@@ -1,23 +1,24 @@
-import { getTranslations } from "next-intl/server";
-import { signIn } from "@/lib/auth";
+"use client";
 
-export default async function LoginButton() {
-    const t = await getTranslations("sidebar");
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import LoginModal from "@/components/LoginModal";
+
+export default function LoginButton() {
+    const t = useTranslations("sidebar");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     return (
-        <form
-            action={async () => {
-                "use server";
-                await signIn("google");
-            }}
-            className="w-full"
-        >
+        <>
             <button
-                type="submit"
-                className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white w-full hover:bg-blue-500"
+                className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white hover:bg-blue-500"
+                onClick={() => setModalIsOpen(true)}
             >
                 {t("login")}
             </button>
-        </form>
+            {modalIsOpen && (
+                <LoginModal onClose={() => setModalIsOpen(false)} />
+            )}
+        </>
     )
 }
