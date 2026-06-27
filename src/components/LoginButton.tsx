@@ -16,9 +16,10 @@ export default function LoginButton() {
             >
                 {t("login")}
             </button>
-            {modalIsOpen && (
-                <LoginModal onClose={() => setModalIsOpen(false)} />
-            )}
+            <LoginModal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+            />
         </>
     )
 }
