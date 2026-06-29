@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { Check as CheckW700 } from "@material-symbols-svg/react/w700";
 import { KeyboardArrowDown } from "@material-symbols-svg/react";
@@ -18,31 +19,37 @@ const locales = [
 ] as const;
 
 export default function LanguageSelector() {
-    const pathname = usePathname();
     const locale = useLocale();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const query = Object.fromEntries(searchParams.entries());
 
     const toggleMenu = () => {
         setMenuIsOpen((prev) => !prev);
-    }
+    };
 
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
+        if (!menuIsOpen) {
+            return;
+        }
+
+        const handlePointerDown = (event: PointerEvent) => {
             if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
+                event.target instanceof Node &&
+                !menuRef.current?.contains(event.target)
             ) {
                 setMenuIsOpen(false);
             }
-        }
+        };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("pointerdown", handlePointerDown);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [])
+            document.removeEventListener("pointerdown", handlePointerDown);
+        };
+    }, [menuIsOpen]);
 
     return (
         <div
@@ -50,27 +57,33 @@ export default function LanguageSelector() {
             className="relative"
         >
             <button
-                className="flex gap-1 items-center text-slate-500 hover:text-slate-800"
+                type="button"
                 onClick={toggleMenu}
+                className="flex gap-1 items-center text-slate-500 hover:text-slate-800"
             >
                 <span className="[text-box:trim-both_cap_alphabetic] text-sm">
                     {locale.toUpperCase()}
                 </span>
                 <KeyboardArrowDown size={20} />
             </button>
-            <div className={`
-                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
-                ${
-                    menuIsOpen
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 pointer-events-none translate-y-4"
-                }
-            `}>
+            <div
+                className={`
+                    absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
+                    ${
+                        menuIsOpen
+                            ? "opacity-100 pointer-events-auto translate-y-0"
+                            : "opacity-0 pointer-events-none translate-y-4"
+                    }
+                `}
+            >
                 {locales.map(({ code, label }) => (
                     <Link
                         key={code}
-                        href={pathname}
                         locale={code}
+                        href={{
+                            pathname,
+                            query,
+                        }}
                         className={`
                             flex gap-4 h-12 items-center justify-between px-4 first:rounded-t last:rounded-b
                             ${
@@ -95,5 +108,5 @@ export default function LanguageSelector() {
                 ))}
             </div>
         </div>
-    )
+    );
 }
