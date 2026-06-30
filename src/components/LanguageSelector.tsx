@@ -22,25 +22,25 @@ export default function LanguageSelector() {
     const locale = useLocale();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const query = Object.fromEntries(searchParams.entries());
 
     const toggleMenu = () => {
-        setMenuIsOpen((prev) => !prev);
+        setIsMenuOpen((prev) => !prev);
     };
 
     useEffect(() => {
-        if (!menuIsOpen) {
+        if (!isMenuOpen) {
             return;
         }
 
         const handlePointerDown = (event: PointerEvent) => {
             if (
-                event.target instanceof Node &&
-                !menuRef.current?.contains(event.target)
+                menuRef.current &&
+                !menuRef.current.contains(event.target as Node)
             ) {
-                setMenuIsOpen(false);
+                setIsMenuOpen(false);
             }
         };
 
@@ -49,7 +49,7 @@ export default function LanguageSelector() {
         return () => {
             document.removeEventListener("pointerdown", handlePointerDown);
         };
-    }, [menuIsOpen]);
+    }, [isMenuOpen]);
 
     return (
         <div
@@ -64,18 +64,19 @@ export default function LanguageSelector() {
                 <span className="[text-box:trim-both_cap_alphabetic] text-sm">
                     {locale.toUpperCase()}
                 </span>
-                <KeyboardArrowDown size={20} />
+                <KeyboardArrowDown
+                    size={20}
+                    className={isMenuOpen ? "rotate-180" : "rotate-0"}
+                />
             </button>
-            <div
-                className={`
-                    absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
-                    ${
-                        menuIsOpen
-                            ? "opacity-100 pointer-events-auto translate-y-0"
-                            : "opacity-0 pointer-events-none translate-y-4"
-                    }
-                `}
-            >
+            <div className={`
+                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
+                ${
+                    isMenuOpen
+                        ? "opacity-100 pointer-events-auto translate-y-0"
+                        : "opacity-0 pointer-events-none translate-y-4"
+                }
+            `}>
                 {locales.map(({ code, label }) => (
                     <Link
                         key={code}
