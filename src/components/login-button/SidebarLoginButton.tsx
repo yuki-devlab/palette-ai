@@ -6,14 +6,14 @@ import LoginModal from "@/components/LoginModal";
 
 export default function SidebarLoginButton() {
     const t = useTranslations("sidebar");
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
-        setModalIsOpen(true);
+        setIsModalOpen(true);
     };
 
     const closeModal = () => {
-        setModalIsOpen(false);
+        setIsModalOpen(false);
     };
 
     return (
@@ -26,7 +26,7 @@ export default function SidebarLoginButton() {
                 {t("login")}
             </button>
             <LoginModal
-                isOpen={modalIsOpen}
+                isOpen={isModalOpen}
                 onClose={closeModal}
             />
         </>
