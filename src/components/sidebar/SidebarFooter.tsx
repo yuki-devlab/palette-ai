@@ -6,8 +6,8 @@ export default async function SidebarFooter() {
     const session = await auth();
 
     return (
-        <>
+        <footer>
             {session?.user ? <AccountSummary /> : <SidebarLoginButton />}
-        </>
+        </footer>
     );
 }
