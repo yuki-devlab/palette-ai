@@ -21,7 +21,7 @@ export default function SidebarLoginButton() {
             <button
                 type="button"
                 onClick={openModal}
-                className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white hover:bg-blue-500"
+                className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white w-full hover:bg-blue-500"
             >
                 {t("login")}
             </button>
