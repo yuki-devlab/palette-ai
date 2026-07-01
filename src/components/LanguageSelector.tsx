@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { Check as CheckW700 } from "@material-symbols-svg/react/w700";
 import { KeyboardArrowDown } from "@material-symbols-svg/react";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/navigation";
 
 const locales = [
     {
