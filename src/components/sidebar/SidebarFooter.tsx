@@ -7,7 +7,11 @@ export default async function SidebarFooter() {
 
     return (
         <footer>
-            {session?.user ? <AccountSummary /> : <SidebarLoginButton />}
+            {session?.user ? (
+                <AccountSummary user={session.user} />
+            ) : (
+                <SidebarLoginButton />
+            )}
         </footer>
     );
 }
