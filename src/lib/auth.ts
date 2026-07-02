@@ -5,5 +5,12 @@ import prisma from "@/lib/prisma";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma),
+    callbacks: {
+        session({ session, user }) {
+            session.user.id = user.id;
+
+            return session;
+        },
+    },
     providers: [Google],
 });
