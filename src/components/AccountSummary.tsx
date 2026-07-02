@@ -24,8 +24,7 @@ export default async function AccountSummary({ user }: AccountSummaryProps) {
     return (
         <div className="flex gap-2 items-center">
             <UserProfile
-                name={user.name}
-                image={user.image}
+                user={user}
                 isFreePlan={isFreePlan}
             />
             {isFreePlan && <UpgradeButton />}
