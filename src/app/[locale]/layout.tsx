@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -15,6 +15,20 @@ type GenerateMetadataProps = {
 type RootLayoutProps = {
     children: React.ReactNode;
     params: Promise<{locale: string}>;
+};
+
+export const viewport: Viewport = {
+    colorScheme: "light dark",
+    themeColor: [
+        {
+            media: "(prefers-color-scheme: light)",
+            color: "#FFFFFF",
+        },
+        {
+            media: "(prefers-color-scheme: dark)",
+            color: "#1D293D",
+        },
+    ],
 };
 
 export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
