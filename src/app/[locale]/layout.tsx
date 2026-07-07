@@ -9,12 +9,12 @@ import { routing } from "@/i18n/routing";
 import Sidebar from "@/components/sidebar/Sidebar";
 
 type GenerateMetadataProps = {
-    params: Promise<{locale: string}>;
+    params: Promise<{ locale: string }>;
 };
 
 type RootLayoutProps = {
     children: React.ReactNode;
-    params: Promise<{locale: string}>;
+    params: Promise<{ locale: string }>;
 };
 
 export const viewport: Viewport = {
