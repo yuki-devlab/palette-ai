@@ -1,7 +1,20 @@
 @import "tailwindcss";
 
 @theme {
+    --animate-bounce: bounce 1s infinite;
     --color-google-login: #131314;
+
+    @keyframes bounce {
+        0%, 100% {
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            transform: translateY(-12.5%);
+        }
+
+        50% {
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            transform: translateY(12.5%);
+        }
+    }
 }
 
 @layer base {
