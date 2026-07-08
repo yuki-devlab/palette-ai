@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 
-type createMetadataProps = {
+type CreateMetadataProps = {
     locale: string;
     pathname: string;
+    ogType?: "website" | "article";
     publishedTime?: string;
 };
 
-export function createMetadata({ locale, pathname, publishedTime }: createMetadataProps): Metadata {
+export function createMetadata({
+    locale,
+    pathname,
+    ogType = "website",
+    publishedTime,
+}: CreateMetadataProps): Metadata {
     const jaPathname = pathname.replace(/^\/(ja|en)(?=$|\/)/, "/ja");
     const enPathname = pathname.replace(/^\/(ja|en)(?=$|\/)/, "/en");
 
@@ -20,7 +26,12 @@ export function createMetadata({ locale, pathname, publishedTime }: createMetada
         },
         openGraph: {
             locale: locale === "ja" ? "ja_JP" : "en_US",
-            publishedTime: publishedTime,
+            ...(ogType === "article" &&
+                publishedTime && {
+                    publishedTime: publishedTime,
+                }),
+            siteName: "Palette AI",
+            type: ogType,
             url: pathname,
         },
     };
