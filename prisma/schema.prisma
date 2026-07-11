@@ -1,69 +1,63 @@
+datasource db {
+    provider = "postgresql"
+}
+
 generator client {
     provider = "prisma-client"
     output   = "../src/generated/prisma"
 }
 
-datasource db {
-    provider = "postgresql"
-}
-
 model Account {
     id                String  @id @default(cuid())
-    access_token      String? @db.Text
-    expires_at        Int?
-    id_token          String? @db.Text
+    userId            String  @map("user_id")
     provider          String
     providerAccountId String  @map("provider_account_id")
+    type              String
+    access_token      String? @db.Text
+    id_token          String? @db.Text
     refresh_token     String? @db.Text
+    expires_at        Int?
     scope             String?
     session_state     String?
     token_type        String?
-    type              String
-    userId            String  @map("user_id")
+
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
     @@unique([provider, providerAccountId])
-    @@map("accounts")
+    @@map("accounts)
 }
 
 model Session {
-    id           String   @id @default(cuid())
+    id           String @id @default(cuid())
+    userId       String @map("user_id")
     expires      DateTime
-    sessionToken String   @unique @map("session_state")
-    userId       String   @map("user_id")
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    sessionToken String @unique @map("session_token")
+
+    user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
     @@map("sessions")
 }
 
 model User {
     id            String    @id @default(cuid())
-    email         String?   @unique
-    emailVerified DateTime? @map("email_verified")
-    image         String?
     name          String?
+    email         String?   @unique
+    image         String?
+    emailVerified DateTime? @map("email_verified")
+
     accounts      Account[]
     sessions      Session[]
-    subscriptions Subscription[]
-    histories     History[]
-    @@map("users")
+
+    @@map("users)
 }
 
 model VerificationToken {
     expires    DateTime
     identifier String
     token      String
+
     @@unique([identifier, token])
     @@map("verification_tokens")
-}
-
-model Subscription {
-    id                   String    @id @default(cuid())
-    userId               String    @unique @map("user_id")
-    stripeCustomerId     String?   @map("stripe_customer_id")
-    stripeSubscriptionId String?   @map("stripe_subscription_id")
-    stripePriceId        String?   @map("stripe_price_id")
-    currentPeriodEnd     DateTime? @map("current_period_end")
-    user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    @@map("subscriptions")
 }
 
 model History {
@@ -74,6 +68,21 @@ model History {
     mainColor   String   @map("main_color")
     accentColor String   @map("accent_color")
     createdAt   DateTime @default(now()) @map("created_at")
+
     user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
     @@map("histories")
+}
+
+model Subscription {
+    id               String   @id @default(cuid())
+    userId           String   @unique @map("user_id")
+    subscriptionId   String   @unique @map("subscription_id")
+    customerId       String   @map("customer_id")
+    priceId          String   @map("price_id")
+    currentPeriodEnd DateTime @map("current_period_end")
+
+    user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("subscriptions")
 }
