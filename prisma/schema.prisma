@@ -24,7 +24,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
-    @@map("accounts)
+    @@map("accounts")
 }
 
 model Session {
@@ -47,8 +47,10 @@ model User {
 
     accounts      Account[]
     sessions      Session[]
+    histories     History[]
+    subscriptions Subscription?
 
-    @@map("users)
+    @@map("users")
 }
 
 model VerificationToken {
