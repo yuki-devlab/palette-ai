@@ -2,11 +2,7 @@
 
 import prisma from "@/lib/prisma";
 
-type GetHistoryProps = {
-    historyId: string;
-};
-
-export async function getHistory({ historyId }: GetHistoryProps) {
+export async function getHistory(historyId: string) {
     const history = await prisma.history.findUnique({
         where: {
             id: historyId,
