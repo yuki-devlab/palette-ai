@@ -10,14 +10,34 @@ type GenerateColorProps = {
     historyId: string;
     mode: string;
     lockedColors?: {
-        baseColor?: string;
-        mainColor?: string;
-        accentColor?: string;
+        base?: string | null;
+        main?: string | null;
+        accent?: string | null;
     };
 };
 
 export async function generateColor({ historyId, mode, lockedColors }: GenerateColorProps) {
     const session = await auth();
+    const isLocked = lockedColors?.base || lockedColors?.main || lockedColors?.accent;
+
+    let promptMessage = `
+        Webサイトによく使われている、おすすめのベースカラー・メインカラー・アクセントカラーを教えてください。
+        ただしベースカラーは、背景色など全体の70%を占める色、そしてメインカラーは、ロゴや見出しなど全体の25%を占める色、さらにアクセントカラーは、ボタンなど全体の5%を占める色として考えてください。\n\n
+    `;
+
+    if (isLocked) {
+        promptMessage += `そして、以下の色が固定されている場合、この色を固定した状態で、その色に合う他の色を再生成してください。\n\n`;
+
+        if (lockedColors.base) {
+            promptMessage += `- ベースカラー：${lockedColors.base}\n`;
+        }
+        if (lockedColors.main) {
+            promptMessage += `- メインカラー：${lockedColors.main}\n`;
+        }
+        if (lockedColors.accent) {
+            promptMessage += `- アクセントカラー：${lockedColors.accent}`;
+        }
+    }
 
     const result = await generateText({
         model: openai("gpt-4o"),
@@ -28,23 +48,26 @@ export async function generateColor({ historyId, mode, lockedColors }: GenerateC
                 accentColor: z.string().describe("HEXカラーコード（例：#00A6F4）"),
             }),
         }),
-        prompt: `
-            Webサイトによく使われている、おすすめのベースカラー・メインカラー・アクセントカラーを教えてください。
-            ただしベースカラーは、背景色など全体の70%を占める色、そしてメインカラーは、ロゴや見出しなど全体の25%を占める色、さらにアクセントカラーは、ボタンなど全体の5%を占める色として考えてください。
-        `,
+        prompt: promptMessage,
     });
 
     const generatedColors = result.output;
 
     const finalColors = {
-        baseColor: lockedColors?.baseColor || generatedColors.baseColor,
-        mainColor: lockedColors?.mainColor || generatedColors.mainColor,
-        accentColor: lockedColors?.accentColor || generatedColors.accentColor,
+        baseColor: lockedColors?.base || generatedColors.baseColor,
+        mainColor: lockedColors?.main || generatedColors.mainColor,
+        accentColor: lockedColors?.accent || generatedColors.accentColor,
     };
 
     if (session?.user) {
-        await prisma.history.create({
-            data: {
+        await prisma.history.upsert({
+            where: { id: historyId },
+            update: {
+                baseColor: finalColors.baseColor,
+                mainColor: finalColors.mainColor,
+                accentColor: finalColors.accentColor,
+            },
+            create: {
                 id: historyId,
                 userId: session.user.id,
                 mode: mode,
