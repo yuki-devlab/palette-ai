@@ -8,7 +8,8 @@ import prisma from "@/lib/prisma";
 
 type GenerateColorProps = {
     historyId: string;
-    mode: string;
+    mode: "random" | "impression" | "condition" | "remaining";
+    params?: any;
     lockedColors?: {
         base?: string | null;
         main?: string | null;
@@ -16,7 +17,7 @@ type GenerateColorProps = {
     };
 };
 
-export async function generateColor({ historyId, mode, lockedColors }: GenerateColorProps) {
+export async function generateColor({ historyId, mode, params, lockedColors }: GenerateColorProps) {
     const session = await auth();
     const isLocked = lockedColors?.base || lockedColors?.main || lockedColors?.accent;
 
@@ -24,6 +25,30 @@ export async function generateColor({ historyId, mode, lockedColors }: GenerateC
         Webサイトによく使われている、おすすめのベースカラー・メインカラー・アクセントカラーを教えてください。
         ただしベースカラーは、背景色など全体の70%を占める色、そしてメインカラーは、ロゴや見出しなど全体の25%を占める色、さらにアクセントカラーは、ボタンなど全体の5%を占める色として考えてください。\n\n
     `;
+
+    if (mode === "impression") {
+        const impressionText = Array.isArray(params) ? params.join("、") : "";
+
+        if (impressionText) {
+            promptMessage += `
+                また、色彩心理学に基づいて、以下の印象に合う配色にしてください。
+
+                ${impressionText}
+            `;
+        }
+    } else if (mode === "condition") {
+        const conditionText = Array.isArray(params) 
+            ? params.join("、") 
+            : (typeof params === "string" ? params : "");
+
+        if (conditionText) {
+            promptMessage += `
+                また、以下の条件に合う配色にしてください。
+
+                ${conditionText}
+            `;
+        }
+    }
 
     if (isLocked) {
         promptMessage += `そして、以下の色が固定されている場合、この色を固定した状態で、その色に合う他の色を再生成してください。\n\n`;
