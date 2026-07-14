@@ -101,11 +101,15 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
             <button
                 type="button"
                 className={`
-                    bg-sky-500 flex gap-2 h-15 items-center justify-center rounded-lg w-full hover:bg-blue-500
-                    ${isRegenerating && "gap-2.5 opacity-75"}
+                    bg-sky-500 flex gap-2 h-15 items-center justify-center rounded-lg w-full disabled:cursor-not-allowed disabled:opacity-75 hover:enabled:bg-blue-500
+                    ${isRegenerating && "gap-2.5"}
                 `}
-                onClick={() => onRegenerate(isLocked)}
-                disabled={isRegenerating}
+                onClick={() => {
+                    if (isRegenerating || isLoading) return;
+                    
+                    onRegenerate(isLocked);
+                }}
+                disabled={isRegenerating || isLoading}
             >
                 {isRegenerating ? (
                     <div className="animate-spin border-3 border-t-white border-white/25 h-4.5 rounded-full w-4.5" />
