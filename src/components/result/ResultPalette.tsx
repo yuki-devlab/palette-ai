@@ -101,7 +101,7 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
             <button
                 type="button"
                 className={`
-                    bg-sky-500 flex gap-2 h-16 items-center justify-center rounded-lg w-full hover:bg-blue-500
+                    bg-sky-500 flex gap-2 h-15 items-center justify-center rounded-lg w-full hover:bg-blue-500
                     ${isRegenerating && "gap-2.5 opacity-75"}
                 `}
                 onClick={() => onRegenerate(isLocked)}
