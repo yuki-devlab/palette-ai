@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700, Check as CheckW700 } from "@material-symbols-svg/react/w700";
+import {
+    ArrowLeftAlt as ArrowLeftAltW700,
+    ArrowRightAlt as ArrowRightAltW700,
+    Check as CheckW700,
+} from "@material-symbols-svg/react/w700";
 import { Link, useRouter } from "@/i18n/navigation";
 
 const impressions = [
