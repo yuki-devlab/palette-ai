@@ -100,7 +100,7 @@ export default function ImpressionClient() {
                 </div>
                 <button
                     type="button"
-                    className="bg-sky-500 py-4.5 relative rounded-full disabled:cursor-not-allowed disabled:opacity-75 hover:enabled:bg-blue-500"
+                    className="bg-sky-500 py-4.5 relative rounded-full disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500"
                     onClick={handleNavigate}
                     disabled={selected.length === 0}
                 >
