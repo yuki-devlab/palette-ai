@@ -56,7 +56,7 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
                 style={isLoading ? undefined : { backgroundColor: color }}
                 className={`
                     border border-slate-300 flex items-center justify-between p-5 rounded w-64
-                    ${isLoading && "animate-pulse bg-slate-300"}
+                    ${isLoading ? "animate-pulse bg-slate-300" : ""}
                 `}
             >
                 <button
