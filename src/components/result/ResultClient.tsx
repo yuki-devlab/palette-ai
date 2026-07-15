@@ -38,6 +38,8 @@ export default function ResultClient() {
     const [mode, setMode] = useState<string | null>(null);
     const [status, setStatus] = useState<StatusProps>("generating");
     const [isNotFound, setIsNotFound] = useState(false);
+    const [params, setParams] = useState<any>(null);
+    const [initialLocked, setInitialLocked] = useState<LockColorProps>({ base: false, main: false, accent: false });
 
     const hasStarted = useRef(false);
 
@@ -50,17 +52,34 @@ export default function ResultClient() {
             const pending = sessionStorage.getItem("generatedColors");
 
             if (pending) {
-                const { id: pendingId, mode: pendingMode } = JSON.parse(pending);
+                const { id: pendingId, mode: pendingMode, params: pendingParams, lockedColors: pendingLockedColors } = JSON.parse(pending);
 
                 if (pendingId === id) {
                     hasStarted.current = true;
                     sessionStorage.removeItem("generatedColors");
                     setMode(pendingMode);
+                    setParams(pendingParams || null);
+
+                    if (pendingLockedColors) {
+                        setInitialLocked({
+                            base: !!pendingLockedColors.base,
+                            main: !!pendingLockedColors.main,
+                            accent: !!pendingLockedColors.accent,
+                        });
+
+                        setColorScheme({
+                            baseColor: pendingLockedColors.base || "",
+                            mainColor: pendingLockedColors.main || "",
+                            accentColor: pendingLockedColors.accent || "",
+                        });
+                    }
 
                     try {
                         const result = await generateColor({
                             historyId: id,
                             mode: pendingMode,
+                            params: pendingParams,
+                            lockedColors: pendingLockedColors,
                         });
 
                         setColorScheme(result);
@@ -101,7 +120,8 @@ export default function ResultClient() {
         try {
             const result = await generateColor({
                 historyId: id!,
-                mode: mode!,
+                mode: mode as any,
+                params: params,
                 lockedColors: {
                     base: locked.base ? colorScheme?.baseColor : null,
                     main: locked.main ? colorScheme?.mainColor : null,
@@ -132,6 +152,7 @@ export default function ResultClient() {
                 onRegenerate={handleRegenerate}
                 isRegenerating={status === "regenerating"}
                 isLoading={status === "generating" || status === "regenerating"}
+                initialLocked={initialLocked}
             />
         </div>
     );
