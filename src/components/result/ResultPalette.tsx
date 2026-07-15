@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Refresh as RefreshW700 } from "@material-symbols-svg/react/w700";
 import ColorSchemeItem from "@/components/result/ColorSchemeItem";
 
@@ -21,6 +21,7 @@ type ResultPaletteProps = {
     onRegenerate: (locked: LockColorProps) => void;
     isRegenerating: boolean;
     isLoading: boolean;
+    initialLocked: LockColorProps;
 };
 
 const colorInfoList = [
@@ -44,12 +45,12 @@ const colorInfoList = [
     },
 ] as const;
 
-export default function ResultPalette({ colorScheme, onRegenerate, isRegenerating, isLoading }: ResultPaletteProps) {
-    const [isLocked, setIsLocked] = useState<LockColorProps>({
-        base: false,
-        main: false,
-        accent: false,
-    });
+export default function ResultPalette({ colorScheme, onRegenerate, isRegenerating, isLoading, initialLocked }: ResultPaletteProps) {
+    const [isLocked, setIsLocked] = useState<LockColorProps>(initialLocked);
+
+    useEffect(() => {
+        setIsLocked(initialLocked);
+    }, [initialLocked]);
 
     const toggleLock = (key: keyof LockColorProps) => {
         setIsLocked((prev) => ({
