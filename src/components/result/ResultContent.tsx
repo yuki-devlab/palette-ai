@@ -18,9 +18,10 @@ type ResultContentProps = {
     onRegenerate: (locked: LockColorProps) => void;
     isRegenerating: boolean;
     isLoading: boolean;
+    initialLocked: LockColorProps;
 };
 
-export default function ResultContent({ colorScheme, onRegenerate, isRegenerating, isLoading }: ResultContentProps) {
+export default function ResultContent({ colorScheme, onRegenerate, isRegenerating, isLoading, initialLocked }: ResultContentProps) {
     return (
         <div className="bg-white flex gap-10 px-10 py-14 rounded-2xl shadow">
             <ResultPalette
@@ -28,6 +29,7 @@ export default function ResultContent({ colorScheme, onRegenerate, isRegeneratin
                 onRegenerate={onRegenerate}
                 isRegenerating={isRegenerating}
                 isLoading={isLoading}
+                initialLocked={initialLocked}
             />
             <div
                 style={{
