@@ -78,7 +78,7 @@ export default function ThemeSelector() {
                 />
             </button>
             <div className={`
-                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
+                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all z-10
                 ${
                     menuIsOpen
                         ? "opacity-100 translate-y-0"
