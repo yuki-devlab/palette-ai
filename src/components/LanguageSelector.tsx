@@ -70,7 +70,7 @@ export default function LanguageSelector() {
                 />
             </button>
             <div className={`
-                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all
+                absolute border border-slate-100 mt-3 rounded shadow-lg text-xs transition-all z-10
                 ${
                     isMenuOpen
                         ? "opacity-100 pointer-events-auto translate-y-0"
