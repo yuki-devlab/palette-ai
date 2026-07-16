@@ -1,9 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
-import { success, z } from "zod";
+import { z } from "zod";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { getSubscription } from "@/lib/subscription";
@@ -151,6 +152,8 @@ export async function generateColor({ historyId, mode, params, lockedColors }: G
                 accentColor: finalColors.accentColor,
             },
         });
+
+        revalidatePath("/");
     }
 
     return finalColors;
