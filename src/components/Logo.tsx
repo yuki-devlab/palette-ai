@@ -4,7 +4,7 @@ export default function Logo() {
             <defs>
                 <linearGradient id="border" x1="73.44" y1="73.44" x2="950.56" y2="950.56" gradientUnits="userSpaceOnUse">
                     <stop offset="0" stopColor="#e1f5fe" />
-                    <stop offset="1" stopColor="#0091ea" stop-opacity=".5" />
+                    <stop offset="1" stopColor="#0091ea" stopOpacity=".5" />
                 </linearGradient>
 
                 <linearGradient id="base" x1="270.03" y1="325.92" x2="793.73" y2="849.62" gradientUnits="userSpaceOnUse">
@@ -43,11 +43,11 @@ export default function Logo() {
                 </linearGradient>
 
                 <filter id="shadow1" x="58" y="207" width="918" height="769" filterUnits="userSpaceOnUse">
-                    <feDropShadow dx="5" dy="5" stdDeviation="25" flood-color="#0277bd" flood-opacity=".25" />
+                    <feDropShadow dx="5" dy="5" stdDeviation="25" floodColor="#0277bd" floodOpacity=".25" />
                 </filter>
 
                 <filter id="shadow2" x="677" y="58" width="299" height="300" filterUnits="userSpaceOnUse">
-                    <feDropShadow dx="5" dy="5" stdDeviation="25" flood-color="#0277bd" flood-opacity=".25" />
+                    <feDropShadow dx="5" dy="5" stdDeviation="25" floodColor="#0277bd" floodOpacity=".25" />
                 </filter>
             </defs>
 
