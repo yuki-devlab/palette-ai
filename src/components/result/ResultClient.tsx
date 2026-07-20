@@ -82,7 +82,7 @@ export default function ResultClient() {
                             lockedColors: pendingLockedColors,
                         });
 
-                        setColorScheme(result);
+                        setColorScheme(result as ColorSchemeProps);
                         setStatus("success");
                     } catch (error) {
                         setStatus("generate-error");
