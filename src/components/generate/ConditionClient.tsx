@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
-import { Link, useRouter } from "@/i18n/navigation";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ConditionClient() {
     const [inputText, setInputText] = useState("");
@@ -31,7 +32,10 @@ export default function ConditionClient() {
     };
 
     return (
-        <div className="flex flex-col gap-16 justify-center min-h-screen mx-auto w-fit">
+        <div className={`
+            flex flex-col gap-16 justify-center flex-1 mx-auto px-4 w-full
+            md:w-fit
+        `}>
             <Link
                 href="/"
                 className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
@@ -48,9 +52,7 @@ export default function ConditionClient() {
                     </h2>
                     <div className="bg-white drop-shadow p-7 relative rounded-lg">
                         <p className="leading-relaxed [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
-                            指定したい条件を、読点もしくはカンマで区切って
-                            <br />
-                            入力してください
+                            指定したい条件を、読点もしくはカンマで区切って入力してください
                         </p>
                         <div className="absolute bg-white -bottom-2.5 h-5 left-1/2 rotate-45 rounded-br -translate-x-1/2 w-5" />
                     </div>
@@ -66,7 +68,10 @@ export default function ConditionClient() {
                             handleNavigate();
                         }
                     }}
-                    className="bg-slate-200 border border-slate-400 px-6 py-5 rounded-lg text-sm w-lg focus:border-slate-800 focus:outline-none"
+                    className={`
+                        bg-slate-200 border border-slate-400 p-5 rounded-lg text-sm w-full focus:border-slate-800 focus:outline-none
+                        md:w-lg md:px-6
+                    `}
                 />
                 <button
                     type="button"

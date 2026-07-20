@@ -1,63 +1,34 @@
-import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP } from "next/font/google";
-import "./globals.css";
-import Sidebar from "@/components/Sidebar";
+import "@/app/globals.css";
+import { SessionProvider } from "next-auth/react";
+import { inter, notoSansJP } from "@/app/fonts";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Sidebar from "@/components/sidebar/Sidebar";
 
-export const metadata: Metadata = {
-    title: {
-        template: "%s | Palette AI",
-        default: "Palette AI | 配色自動生成AIツール",
-    },
-    description: "Webデザインなどで必要な配色を自動生成するAIツールです。配色の知識がない方でも、簡単に生成することができます。",
-    metadataBase: new URL("https://palette-ai.com"),
-    alternates: {
-        canonical: "/",
-    },
-    openGraph: {
-        title: "Palette AI",
-        description: "Webデザインなどで必要な配色を自動生成するAIツールです。配色の知識がない方でも、簡単に生成することができます。",
-        url: "/",
-        siteName: "Palette AI",
-        images: "/ogp.png",
-        locale: "ja_JP",
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-    },
-    icons: {
-        icon: "/icon.png",
-        other: {
-            rel: "apple-touch-icon",
-            url: "/apple-touch-icon.png",
-        }
-    }
+type RootLayoutProps = {
+    children: React.ReactNode;
 };
 
-const inter = Inter({
-    subsets: ["latin"],
-    variable: "--font-inter",
-})
-
-const notoSansJP = Noto_Sans_JP({
-    subsets: ["latin"],
-    variable: "--font-noto-sans-jp",
-})
-
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
-        <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
+        <html
+            lang="ja"
+            className={`${inter.variable} ${notoSansJP.variable}`}
+        >
             <body>
-                <div className="flex min-h-screen">
-                    <Sidebar />
-                    <main className="w-[calc(100%-320px)] ml-80 flex flex-col items-center justify-center">
-                        {children}
-                    </main>
-                </div>
+                <SessionProvider>
+                    <div className="flex">
+                        <Sidebar />
+                        <div className="flex min-w-0 flex-1 flex-col">
+                            <Header />
+                            <main className="flex flex-1 flex-col min-h-screen">
+                                {children}
+                            </main>
+                            <Footer />
+                        </div>
+                    </div>
+                    <div id="portal" />
+                </SessionProvider>
             </body>
         </html>
     );

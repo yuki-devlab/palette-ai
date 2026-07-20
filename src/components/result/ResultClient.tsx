@@ -141,7 +141,7 @@ export default function ResultClient() {
     }
 
     return (
-        <div className="flex flex-col gap-6 justify-center min-h-screen mx-auto w-fit">
+        <div className="flex flex-col gap-6 justify-center min-h-screen mx-auto w-full max-w-5xl py-10 px-4 md:px-10">
             <ResultHeader
                 mode={mode}
                 status={status}

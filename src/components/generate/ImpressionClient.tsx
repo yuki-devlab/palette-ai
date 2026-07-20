@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { nanoid } from "nanoid";
 import {
     ArrowLeftAlt as ArrowLeftAltW700,
     ArrowRightAlt as ArrowRightAltW700,
     Check as CheckW700,
 } from "@material-symbols-svg/react/w700";
-import { Link, useRouter } from "@/i18n/navigation";
 
 const impressions = [
     "愛情", "興奮", "生命力", "安心", "伝統",
@@ -44,7 +45,10 @@ export default function ImpressionClient() {
     };
 
     return (
-        <div className="flex flex-col gap-16 justify-center min-h-screen mx-auto w-fit">
+        <div className={`
+            flex flex-col gap-10 justify-center flex-1 mx-auto px-4 py-10 w-full
+            md:gap-16 md:py-0 md:w-fit
+        `}>
             <div className="flex items-center justify-between">
                 <Link
                     href="/"
@@ -73,7 +77,10 @@ export default function ImpressionClient() {
                         <div className="absolute bg-white -bottom-2.5 h-5 left-1/2 rotate-45 rounded-br -translate-x-1/2 w-5" />
                     </div>
                 </div>
-                <div className="gap-x-12 gap-y-6 grid grid-cols-5">
+                <div className={`
+                    gap-7 grid grid-cols-3
+                    md:grid-cols-5
+                `}>
                     {impressions.map((impression) => {
                         const isChecked = selected.includes(impression);
 

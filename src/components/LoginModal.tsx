@@ -1,53 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal, useFormStatus } from "react-dom";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { createPortal } from "react-dom";
 import { Close as CloseW700 } from "@material-symbols-svg/react/w700";
 import { login } from "@/actions/auth";
+import Logo from "@/components/Logo";
+import ModalLoginButton from "@/components/login-button/ModalLoginButton";
 
 type LoginModalProps = {
     isOpen: boolean;
     onClose: () => void;
-}
-
-function LoginButton() {
-    const t = useTranslations("loginModal");
-    const { pending } = useFormStatus();
-
-    return (
-        <button
-            type="submit"
-            disabled={pending}
-            className="bg-google-login flex gap-3 items-center justify-center py-5 rounded-full w-full hover:bg-slate-800"
-        >
-            {pending ? (
-                <div className="animate-spin border-[3px] border-t-white border-white/25 h-5 rounded-full w-5" />
-            ) : (
-                <Image
-                    src="/google-logo.svg"
-                    width={20}
-                    height={20}
-                    alt=""
-                />
-            )}
-            <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
-                {t("login")}
-            </span>
-        </button>
-    )
-}
+};
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
-    const t = useTranslations("loginModal");
     const [mounted, setMounted] = useState(false);
     const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
+    const handleLogin = async () => {
+        sessionStorage.setItem("login-progress", "true");
+
+        await login();
+    };
+
     useEffect(() => {
         setMounted(true);
-        setPortalRoot(document.getElementById("portal"));
-    }, [])
+        setPortalRoot(document.getElementById("portal") ?? document.body);
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -59,13 +37,13 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         return () => {
             document.body.style.overflow = "";
         }
-    }, [isOpen])
+    }, [isOpen]);
 
     if (!mounted || !portalRoot) {
         return null;
     }
 
-    return createPortal (
+    return createPortal(
         <div
             className={`
                 fixed flex inset-0 items-center justify-center
@@ -108,23 +86,25 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 `}
             >
                 <div className="bg-sky-100 flex h-52 items-center justify-center rounded-t-3xl">
-                    {/* <Logo /> */}
+                    <div className="w-25 h-25">
+                        <Logo />
+                    </div>
                 </div>
                 <div className="flex flex-col gap-7 pb-6 pt-7 px-6 text-center">
                     <h2 className="font-bold [text-box:trim-both_cap_alphabetic] text-xl">
-                        {t("title")}
+                        Palette AIへようこそ！
                     </h2>
                     <p className="leading-relaxed [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
-                        {t("description.line1")}
+                        ログインすると、生成履歴を保存できます。
                         <br />
-                        {t("description.line2")}
+                        保存した履歴は、いつでもどこからでも確認できます。
                     </p>
-                    <form action={login}>
-                        <LoginButton />
+                    <form action={handleLogin}>
+                        <ModalLoginButton />
                     </form>
                 </div>
             </div>
         </div>,
         portalRoot,
-    )
+    );
 }

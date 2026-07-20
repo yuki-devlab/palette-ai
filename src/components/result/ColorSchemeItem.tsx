@@ -43,7 +43,10 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
     }
 
     return (
-        <div className="contents">
+        <div className={`
+            flex flex-col gap-5
+            md:contents
+        `}>
             <div className="flex flex-col gap-4 whitespace-nowrap">
                 <dt className="font-bold [text-box:trim-both_cap_alphabetic] text-sm">
                     {title}
@@ -55,7 +58,8 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
             <div
                 style={isLoading ? undefined : { backgroundColor: color }}
                 className={`
-                    border border-slate-300 flex items-center justify-between p-5 rounded w-64
+                    border border-slate-300 flex items-center justify-between p-5 rounded w-full
+                    md:w-64
                     ${isLoading ? "animate-pulse bg-slate-300" : ""}
                 `}
             >

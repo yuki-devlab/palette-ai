@@ -1,18 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-    --animate-bounce: bounce 1s infinite;
+    --animate-bounce: bounce 1.25s linear infinite;
     --color-google-login: #131314;
 
     @keyframes bounce {
-        0%, 100% {
-            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            transform: translateY(-12.5%);
+        0% {
+            transform: translate3d(0, -8px, 0);
+            opacity: 0;
         }
 
-        50% {
-            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            transform: translateY(12.5%);
+        15% {
+            transform: translate3d(0, -4px, 0);
+            opacity: 1;
+        }
+
+        70% {
+            transform: translate3d(0, 14px, 0);
+            opacity: 1;
+        }
+
+        85% {
+            transform: translate3d(0, 20px, 0);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translate3d(0, 20px, 0);
+            opacity: 0;
         }
     }
 }

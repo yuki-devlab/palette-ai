@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 import LoginModal from "@/components/LoginModal";
 
 export default function SidebarLoginButton() {
-    const t = useTranslations("sidebar");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -23,7 +21,7 @@ export default function SidebarLoginButton() {
                 onClick={openModal}
                 className="bg-sky-500 font-bold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-sm text-white w-full hover:bg-blue-500"
             >
-                {t("login")}
+                ログイン
             </button>
             <LoginModal
                 isOpen={isModalOpen}

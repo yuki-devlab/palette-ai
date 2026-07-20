@@ -3,7 +3,7 @@
 import { ArrowLeftAlt as ArrowLeftAltW700 } from "@material-symbols-svg/react/w700";
 import { Check as CheckW700 } from "@material-symbols-svg/react/w700";
 import { ErrorFill } from "@material-symbols-svg/react";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
 
 type ResultHeaderProps = {
     mode: string | null;

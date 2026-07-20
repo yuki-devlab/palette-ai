@@ -2,10 +2,8 @@
 
 import { useFormStatus } from "react-dom";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 export default function ModalLoginButton() {
-    const t = useTranslations("loginModal");
     const { pending } = useFormStatus();
 
     return (
@@ -25,7 +23,7 @@ export default function ModalLoginButton() {
                 />
             )}
             <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
-                {t("login")}
+                Googleでログイン
             </span>
         </button>
     );

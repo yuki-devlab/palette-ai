@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
-import { Link, useRouter } from "@/i18n/navigation";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ColorSchemeItem from "@/components/generate/remaining/ColorSchemeItem";
 
 const colorInfoList = [
@@ -89,7 +90,10 @@ export default function RemainingClient() {
     };
 
     return (
-        <div className="flex flex-col gap-16 justify-center min-h-screen mx-auto w-fit">
+        <div className={`
+            flex flex-col gap-16 justify-center mx-auto px-4 w-full h-full
+            md:w-fit
+        `}>
             <Link
                 href="/"
                 className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
@@ -101,7 +105,10 @@ export default function RemainingClient() {
             </Link>
             <div className="flex flex-col gap-10">
                 <div className="flex flex-col gap-8 text-center">
-                    <h2 className="font-bold text-2xl [text-box:trim-both_cap_alphabetic]">
+                    <h2 className={`
+                        font-bold text-[22px] [text-box:trim-both_cap_alphabetic]
+                        md:text-2xl
+                    `}>
                         決まっている色から残りを自動生成
                     </h2>
                     <div className="bg-white drop-shadow p-7 relative rounded-lg">
@@ -113,7 +120,10 @@ export default function RemainingClient() {
                         <div className="absolute bg-white -bottom-2.5 h-5 left-1/2 rotate-45 rounded-br -translate-x-1/2 w-5" />
                     </div>
                 </div>
-                <dl className="gap-x-10 gap-y-6 grid grid-cols-[auto_auto] items-center">
+                <dl className={`
+                    gap-10 grid grid-cols-1 items-center
+                    md:grid-cols-[auto_auto]
+                `}>
                     {colorInfoList.map((colorInfo) => (
                         <ColorSchemeItem
                             key={colorInfo.id}

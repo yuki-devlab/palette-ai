@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
 import { createCheckoutSession } from "@/actions/stripe";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 export default function PricingClient() {
     const [isYearly, setIsYearly] = useState(true);

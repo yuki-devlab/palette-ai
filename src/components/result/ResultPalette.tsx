@@ -60,7 +60,10 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
     };
 
     return (
-        <div className="flex flex-col gap-8 items-center w-min">
+        <div className={`
+            flex flex-col gap-8 items-center w-full
+            lg:w-md
+        `}>
             <div className="flex gap-4 items-end">
                 <span className="bg-sky-500 h-6 origin-bottom -rotate-45 w-0.75" />
                 <h2 className="font-bold text-2xl [text-box:trim-both_cap_alphabetic]">
@@ -75,7 +78,10 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
                 <br />
                 また、好きな色だけを固定して、それ以外の色を再生成することも可能です。
             </p>
-            <dl className="gap-x-10 gap-y-5 grid grid-cols-[auto_auto] items-center">
+            <dl className={`
+                gap-x-10 gap-y-5 grid grid-cols-1 items-center w-full
+                md:grid-cols-[auto_auto]
+            `}>
                 {colorInfoList.map((colorInfo) => {
                     const isThisLocked = isLocked[colorInfo.id];
                     const isItemLoading = isLoading && !isThisLocked;
@@ -93,12 +99,6 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
                     )
                 })}
             </dl>
-            <button
-                type="button"
-                className="self-end text-slate-500 text-xs underline underline-offset-[50%] hover:text-slate-800"
-            >
-                ベースカラー・メインカラー・アクセントカラーとは？
-            </button>
             <button
                 type="button"
                 className={`

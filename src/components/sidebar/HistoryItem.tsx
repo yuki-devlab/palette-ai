@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Delete } from "@material-symbols-svg/react";
 import { MoreVert as MoreVertW700 } from "@material-symbols-svg/react/w700";
 import { deleteHistory } from "@/actions/delete-history";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 type HistoryItemProps = {
     id: string;
