@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import "@/app/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { inter, notoSansJP } from "@/app/fonts";
@@ -7,6 +8,15 @@ import Sidebar from "@/components/sidebar/Sidebar";
 
 type RootLayoutProps = {
     children: React.ReactNode;
+};
+
+export const metadata: Metadata = {
+    description: "Palette AIは、ベースカラー・メインカラー・アクセントカラーを自動生成するAIツールです。配色の知識がない方でも、簡単に生成することができます。",
+    metadataBase: new URL("https://palette-ai.jp"),
+    title: {
+        template: "%s | Palette AI",
+        default: "Palette AI | クリエイターのための配色支援ツール"
+    }
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
