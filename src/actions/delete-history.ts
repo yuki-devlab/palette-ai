@@ -6,16 +6,15 @@ import prisma from "@/lib/prisma";
 
 export async function deleteHistory(historyId: string) {
     const session = await auth();
-    const userId = session?.user.id;
 
-    if (!userId) {
+    if (!session?.user.id) {
         throw new Error("ログインしてください");
     }
 
     const result = await prisma.history.deleteMany({
         where: {
             id: historyId,
-            userId,
+            userId: session.user.id,
         },
     });
 
