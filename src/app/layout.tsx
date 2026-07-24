@@ -1,34 +1,29 @@
 import "@/app/globals.css";
-import { SessionProvider } from "next-auth/react";
 import { inter, notoSansJP } from "@/app/fonts";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 
-type RootLayoutProps = {
-    children: React.ReactNode;
-};
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout(children: React.ReactNode) {
     return (
         <html
             lang="ja"
             className={`${inter.variable} ${notoSansJP.variable}`}
         >
             <body>
-                <SessionProvider>
-                    <div className="flex">
-                        <Sidebar />
-                        <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex">
+                    <Sidebar />
+                    <div className="flex-1">
+                        <div className="flex flex-col h-screen">
                             <Header />
-                            <main className="flex flex-1 flex-col min-h-screen">
+                            <main className="flex-1">
                                 {children}
                             </main>
-                            <Footer />
                         </div>
+                        <Footer />
                     </div>
-                    <div id="portal" />
-                </SessionProvider>
+                </div>
+                <div id="portal" />
             </body>
         </html>
     );

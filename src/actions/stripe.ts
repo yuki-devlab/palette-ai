@@ -1,22 +1,27 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { stripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
+import { stripe } from "@/lib/stripe";
 
-export async function createCheckoutSession(plan: "monthly" | "yearly") {
+type createCheckoutSessionProps = {
+    plan: "monthly" | "yearly";
+    returnUrl: string;
+};
+
+export async function createCheckoutSession({ plan, returnUrl }: createCheckoutSessionProps) {
     const session = await auth();
 
-    if (!session?.user || !session.user.email) {
-        throw new Error("ログインが必要です");
+    if (!session?.user.id || !session.user.email) {
+        throw new Error("ログインしてください");
     }
 
-    const priceId = plan === "yearly"
-        ? process.env.STRIPE_PRICE_ID_YEARLY
-        : process.env.STRIPE_PRICE_ID_MONTHLY;
+    const priceId = plan === "monthly"
+        ? process.env.STRIPE_PRICE_ID_MONTHLY
+        : process.env.STRIPE_PRICE_ID_YEARLY;
     
     if (!priceId) {
-        throw new Error("料金プランのIDが設定されていません");
+        throw new Error("料金プランの設定に問題が発生しました");
     }
 
     const subscription = await prisma.subscription.findUnique({
@@ -48,8 +53,8 @@ export async function createCheckoutSession(plan: "monthly" | "yearly") {
                 quantity: 1,
             },
         ],
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/?success=true`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}`,
+        success_url: `${returnUrl}/?success=true`,
+        cancel_url: `${returnUrl}`,
         metadata: {
             userId: session.user.id,
         },
