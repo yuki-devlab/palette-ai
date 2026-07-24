@@ -1,19 +1,12 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
+import { stripe } from "@/lib/stripe";
 
 export async function POST(req: Request) {
     const body = await req.text();
-    const signature = (await headers()).get("Stripe-Signature") as string;
-
-    if (!signature) {
-        return new NextResponse(
-            "Stripe signature is required",
-            { status: 400 },
-        );
-    }
+    const signature = (await headers()).get("Stripe-Signature") || "";
 
     let event: Stripe.Event;
 
@@ -33,7 +26,7 @@ export async function POST(req: Request) {
     if (event.type === "checkout.session.completed") {
         const session = event.data.object as Stripe.Checkout.Session;
 
-        if (!session?.metadata?.userId) {
+        if (!session.metadata?.userId) {
             return new NextResponse(
                 "User ID is required",
                 { status: 400 },
@@ -51,31 +44,16 @@ export async function POST(req: Request) {
             session.subscription,
         );
 
-        const subscriptionItem = subscription.items.data[0];
-
-        if (!subscriptionItem) {
-            return new NextResponse(
-                "Subscription item was not found",
-                { status: 400 },
-            );
-        }
-
         await prisma.subscription.create({
             data: {
                 userId: session.metadata.userId,
                 subscriptionId: subscription.id,
-                customerId:
-                    typeof subscription.customer === "string"
-                        ? subscription.customer
-                        : subscription.customer.id,
-                priceId: subscriptionItem.price.id,
-                currentPeriodEnd: new Date(subscriptionItem.current_period_end * 1000),
+                customerId: session.customer as string,
+                priceId: subscription.items.data[0].price.id,
+                currentPeriodEnd: new Date(subscription.items.data[0].current_period_end * 1000),
             },
         });
     }
 
-    return new NextResponse(
-        null,
-        { status: 200 },
-    );
+    return new NextResponse(null, { status: 200 });
 }
