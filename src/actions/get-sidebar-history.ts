@@ -6,9 +6,8 @@ import { getSubscription } from "@/lib/subscription";
 
 export async function getSidebarHistory() {
     const session = await auth();
-    const userId = session?.user.id;
 
-    if (!userId) {
+    if (!session?.user.id) {
         return [];
     }
 
@@ -16,7 +15,7 @@ export async function getSidebarHistory() {
 
     return await prisma.history.findMany({
         where: {
-            userId,
+            userId: session.user.id,
         },
         orderBy: {
             createdAt: "desc",
