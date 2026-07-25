@@ -1,22 +1,36 @@
 import "@/app/globals.css";
 import { inter, notoSansJP } from "@/app/fonts";
+import { cn } from "@/lib/utils";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 
-export default function RootLayout(children: React.ReactNode) {
+export default function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
         <html
             lang="ja"
             className={`${inter.variable} ${notoSansJP.variable}`}
         >
             <body>
-                <div className="flex">
+                <div className="lg:flex">
                     <Sidebar />
-                    <div className="flex-1">
-                        <div className="flex flex-col h-screen">
+                    <div className={cn(
+                        "px-5",
+                        "md:px-6",
+                        "lg:flex-1 lg:px-10",
+                        "xl:px-0",
+                    )}>
+                        <div className={cn(
+                            "flex flex-col h-screen pt-5",
+                            "md:pt-6",
+                            "lg:pt-0",
+                        )}>
                             <Header />
-                            <main className="flex-1">
+                            <main className="flex flex-1 items-center justify-center">
                                 {children}
                             </main>
                         </div>
