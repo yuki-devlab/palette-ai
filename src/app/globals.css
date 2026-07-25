@@ -1,43 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-    --animate-bounce: bounce 1.25s linear infinite;
-    --color-google-login: #131314;
-
-    @keyframes bounce {
-        0% {
-            transform: translate3d(0, -8px, 0);
-            opacity: 0;
-        }
-
-        15% {
-            transform: translate3d(0, -4px, 0);
-            opacity: 1;
-        }
-
-        70% {
-            transform: translate3d(0, 14px, 0);
-            opacity: 1;
-        }
-
-        85% {
-            transform: translate3d(0, 20px, 0);
-            opacity: 0;
-        }
-
-        100% {
-            transform: translate3d(0, 20px, 0);
-            opacity: 0;
-        }
-    }
-}
-
 @layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop {
+        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     body {
-        background: linear-gradient(var(--color-slate-100), var(--color-slate-200));
+        background-image: linear-gradient(var(--color-sky-50), var(--color-sky-100));
         color: var(--color-slate-800);
         font-family: var(--font-inter), var(--font-noto-sans-jp), system-ui, sans-serif;
         letter-spacing: 0.05em;
+        min-height: 100vh;
     }
 
     button:not(:disabled),
