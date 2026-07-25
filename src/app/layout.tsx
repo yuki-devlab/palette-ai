@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar/Sidebar";
 
