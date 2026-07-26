@@ -3,7 +3,7 @@ import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/Header";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Sidebar from "@/components/layout/Sidebar";
 
 export default function RootLayout({
     children,
