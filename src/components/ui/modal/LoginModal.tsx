@@ -41,9 +41,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     return createPortal(
         <div className={cn(
-            "fixed flex inset-0 items-center px-5",
+            "fixed flex inset-0 items-center justify-center px-5",
             isOpen ? "pointer-events-auto" : "pointer-events-none",
-            "md:justify-center md:p-0",
+            "md:p-0",
         )}>
             <div
                 className={cn(
@@ -74,9 +74,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 </button>
             </div>
             <div className={cn(
-                "bg-white origin-bottom p-2 rounded-4xl shadow-2xl w-full z-10",
+                "bg-white max-w-86 origin-bottom p-2 rounded-4xl shadow-2xl w-full z-10",
                 isOpen ? "opacity-100 scale-100" : "opacity-0 scale-50",
-                "md:w-sm",
+                "md:max-w-none md:w-sm",
                 "lg:w-xs",
                 "xl:w-md",
             )}>
