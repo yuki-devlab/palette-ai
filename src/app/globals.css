@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+    --color-google-login: #131314;
+}
+
 @layer base {
     *,
     ::after,
