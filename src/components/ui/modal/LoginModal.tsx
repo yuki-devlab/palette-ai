@@ -111,7 +111,10 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                         <br />
                         保存した履歴は、いつでもどこからでも確認できます。
                     </p>
-                    <form action={login}>
+                    <form
+                        action={login}
+                        className="w-full"
+                    >
                         <ModalLoginButton />
                     </form>
                 </div>
