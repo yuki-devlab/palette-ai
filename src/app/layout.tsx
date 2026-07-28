@@ -3,13 +3,13 @@ import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/Header";
-import Sidebar from "@/components/layout/Sidebar";
+import Sidebar from "@/components/layout/sidebar/Sidebar";
 
-export default function RootLayout({
-    children,
-}: Readonly<{
+type RootLayoutProps = {
     children: React.ReactNode;
-}>) {
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html
             lang="ja"
