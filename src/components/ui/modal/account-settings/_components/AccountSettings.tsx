@@ -22,7 +22,7 @@ export default function AccountSettings() {
                 "lg:text-xs",
                 "xl:text-sm",
             )}>
-                サブスクリプション
+                アカウント
             </h2>
             <div className={cn(
                 "bg-white rounded-[20px]",
