@@ -1,38 +1,42 @@
 import type { Metadata } from "next";
 
-type CreateMetadataProps = {
-    locale: string;
-    pathname: string;
+type createMetadataProps = {
+    title?: string;
+    description?: string;
+    path: string;
     ogType?: "website" | "article";
     publishedTime?: string;
+    noIndex?: boolean;
+    noFollow?: boolean;
 };
 
 export function createMetadata({
-    locale,
-    pathname,
-    ogType = "website",
+    title,
+    description,
+    path,
+    ogType,
     publishedTime,
-}: CreateMetadataProps): Metadata {
-    const jaPathname = pathname.replace(/^\/(ja|en)(?=$|\/)/, "/ja");
-    const enPathname = pathname.replace(/^\/(ja|en)(?=$|\/)/, "/en");
+    noIndex,
+    noFollow,
+}: createMetadataProps): Metadata {
+    const hasRobots = noIndex !== undefined || noFollow !== undefined;
 
     return {
+        ...(title && { title }),
+        ...(description && { description }),
         alternates: {
-            canonical: pathname,
-            languages: {
-                "ja-JP": jaPathname,
-                "en-US": enPathname,
-            },
+            canonical: path,
         },
         openGraph: {
-            locale: locale === "ja" ? "ja_JP" : "en_US",
-            ...(ogType === "article" &&
-                publishedTime && {
-                    publishedTime: publishedTime,
-                }),
-            siteName: "Palette AI",
+            url: path,
             type: ogType,
-            url: pathname,
+            ...(publishedTime && { publishedTime }),
         },
+        ...(hasRobots && {
+            robots: {
+                ...(noIndex !== undefined && { index: !noIndex }),
+                ...(noFollow !== undefined && { follow: !noFollow }),
+            },
+        }),
     };
 }
