@@ -1,10 +1,10 @@
 import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { getSidebarHistory } from "@/actions/get-sidebar-history";
-import AccountSummary from "@/components/ui/AccountSummary";
+import AccountSummary from "@/components/layout/sidebar/_components/AccountSummary";
 import HistoryItem from "@/components/ui/HistoryItem";
-import HistoryTooltip from "@/components/ui/HistoryTooltip";
 import LoginButton from "@/components/layout/sidebar/_components/LoginButton";
+import Tooltip from "@/components/layout/sidebar/_components/Tooltip";
 
 export default async function Sidebar() {
     const session = await auth();
@@ -31,7 +31,7 @@ export default async function Sidebar() {
                     )}>
                         生成履歴
                     </h2>
-                    <HistoryTooltip />
+                    <Tooltip />
                 </div>
                 {histories.length > 0 ? (
                     <ul className="flex flex-col gap-2 overflow-y-auto">
