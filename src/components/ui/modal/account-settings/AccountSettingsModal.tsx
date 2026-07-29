@@ -78,9 +78,9 @@ export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: A
                 </button>
             </div>
             <div className={cn(
-                "bg-slate-100 flex flex-col gap-6 origin-bottom px-4 py-5 rounded-4xl shadow-2xl w-full z-10",
+                "bg-slate-100 flex flex-col gap-6 max-w-sm origin-bottom px-4 py-5 rounded-4xl shadow-2xl w-full z-10",
                 isOpen ? "opacity-100 scale-100" : "opacity-0 scale-50",
-                "md:gap-7 md:px-5 md:py-7 md:w-md",
+                "md:gap-7 md:max-w-none md:px-5 md:py-7 md:w-md",
                 "lg:px-4 lg:py-6 lg:w-sm",
                 "xl:px-6 xl:py-8 xl:w-lg",
             )}>
