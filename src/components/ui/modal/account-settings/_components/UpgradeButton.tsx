@@ -20,11 +20,11 @@ export default function UpgradeButton() {
             <button
                 type="button"
                 className={cn(
-                    "bg-sky-500 font-bold p-3.25 rounded-full text-[10px] [text-box:trim-both_cap_alphabetic] text-white",
+                    "bg-sky-500 font-bold p-3 rounded-full text-[10px] [text-box:trim-both_cap_alphabetic] text-white",
                     "hover:bg-blue-500",
                     "md:p-3.5 md:text-xs",
-                    "lg:px-3 lg:py-3.25 text-[10px]",
-                    "xl:p-4 xl:text-xs",
+                    "lg:p-3 lg:text-[10px]",
+                    "xl:px-3.5 xl:py-3.75 xl:text-xs",
                 )}
                 onClick={openModal}
             >
