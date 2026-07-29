@@ -1,6 +1,11 @@
+import { createMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import ModeCarousel from "@/components/ui/ModeCarousel";
+
+export const metadata = createMetadata({
+    path: "/",
+});
 
 export default function HomePage() {
     return (
