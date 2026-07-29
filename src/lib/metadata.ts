@@ -14,7 +14,7 @@ export function createMetadata({
     title,
     description,
     path,
-    ogType,
+    ogType = "website",
     publishedTime,
     noIndex,
     noFollow,
