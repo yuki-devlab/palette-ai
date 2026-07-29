@@ -31,7 +31,7 @@ export default async function AccountSummary({ user }: AccountSummaryProps) {
                 user={user}
                 isPro={isPro}
             />
-            <UpgradeButton />
+            {!isPro && <UpgradeButton />}
         </div>
     );
 }
