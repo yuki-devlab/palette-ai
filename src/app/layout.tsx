@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://palette-ai.jp"),
     openGraph: {
         siteName: "Palette AI",
-        type: "website",
     },
     title: {
         default: "Palette AI | クリエイターのための配色支援ツール",
