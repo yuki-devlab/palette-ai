@@ -6,18 +6,18 @@ const FOOTER_INFO_LIST = [
         id: "about",
         title: "About",
         links: [
-            {
-                title: "Palette AIについて",
-                url: "/about",
-            },
-            {
-                title: "使い方",
-                url: "/guide",
-            },
-            {
-                title: "お知らせ",
-                url: "/news",
-            },
+            // {
+            //     title: "Palette AIについて",
+            //     url: "/about",
+            // },
+            // {
+            //     title: "使い方",
+            //     url: "/guide",
+            // },
+            // {
+            //     title: "お知らせ",
+            //     url: "/news",
+            // },
             {
                 title: "料金プラン",
                 url: "/pricing",
@@ -34,27 +34,27 @@ const FOOTER_INFO_LIST = [
             },
             {
                 title: "プライバシーポリシー",
-                url: "/privacy",
+                url: "/terms?tab=privacy",
             },
             {
                 title: "特商法表記",
-                url: "/commercial-law",
+                url: "/terms?tab=commercial-law",
             },
         ],
-    },
-    {
-        id: "support",
-        title: "Support",
-        links: [
-            {
-                title: "よくある質問",
-                url: "/faq",
-            },
-            {
-                title: "お問い合わせ",
-                url: "/contact",
-            },
-        ],
+    // },
+    // {
+    //     id: "support",
+    //     title: "Support",
+    //     links: [
+    //         {
+    //             title: "よくある質問",
+    //             url: "/faq",
+    //         },
+    //         {
+    //             title: "お問い合わせ",
+    //             url: "/contact",
+    //         },
+    //     ],
     },
 ] as const;
 

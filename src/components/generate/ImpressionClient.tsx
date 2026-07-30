@@ -35,7 +35,7 @@ export default function ImpressionClient() {
 
         const historyId = nanoid(15);
 
-        sessionStorage.setItem("generatedColors", JSON.stringify({
+        sessionStorage.setItem("generated-colors", JSON.stringify({
             id: historyId,
             mode: "impression",
             params: selected,
@@ -46,7 +46,7 @@ export default function ImpressionClient() {
 
     return (
         <div className={`
-            flex flex-col gap-10 justify-center flex-1 mx-auto px-4 py-10 w-full
+            flex flex-col gap-10 justify-center flex-1 mx-auto px-4 py-10 max-w-2xl
             md:gap-16 md:py-0 md:w-fit
         `}>
             <div className="flex items-center justify-between">

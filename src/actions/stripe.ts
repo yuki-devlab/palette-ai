@@ -6,10 +6,9 @@ import { stripe } from "@/lib/stripe";
 
 type createCheckoutSessionProps = {
     plan: "monthly" | "yearly";
-    returnUrl: string;
 };
 
-export async function createCheckoutSession({ plan, returnUrl }: createCheckoutSessionProps) {
+export async function createCheckoutSession({ plan }: createCheckoutSessionProps) {
     const session = await auth();
 
     if (!session?.user.id || !session.user.email) {
@@ -43,6 +42,8 @@ export async function createCheckoutSession({ plan, returnUrl }: createCheckoutS
         customerId = customer.id;
     }
 
+    const returnUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
     const stripeSession = await stripe.checkout.sessions.create({
         mode: "subscription",
         customer: customerId,
@@ -53,7 +54,7 @@ export async function createCheckoutSession({ plan, returnUrl }: createCheckoutS
                 quantity: 1,
             },
         ],
-        success_url: `${returnUrl}/?success=true`,
+        success_url: `${returnUrl}`,
         cancel_url: `${returnUrl}`,
         metadata: {
             userId: session.user.id,

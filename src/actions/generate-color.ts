@@ -11,7 +11,7 @@ import { getSubscription } from "@/lib/subscription";
 
 type GenerateColorProps = {
     historyId: string;
-    mode: "random" | "impression" | "condition" | "remaining";
+    mode: "auto" | "impression" | "condition" | "remaining";
     params?: any;
     lockedColors?: {
         base?: string | null;

@@ -41,10 +41,10 @@ export default function TermsClient() {
                     プライバシーポリシー
                 </Link>
                 <Link
-                    href="/terms?tab=commercial-transactions"
+                    href="/terms?tab=commercial-law"
                     className={`
                         flex items-center justify-center font-bold px-3 py-3.5 rounded-full [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm
-                        ${activeTab === "commercial-transactions" ? "bg-white" : ""}
+                        ${activeTab === "commercial-law" ? "bg-white" : ""}
                         md:text-base
                     `}
                 >
@@ -513,7 +513,7 @@ export default function TermsClient() {
                         </p>
                     </div>
                 )}
-                {activeTab === "commercial-transactions" && (
+                {activeTab === "commercial-law" && (
                     <div className="flex flex-col gap-7">
                         <h2 className="font-bold text-2xl [text-box:trim-both_cap_alphabetic]">
                             事業者

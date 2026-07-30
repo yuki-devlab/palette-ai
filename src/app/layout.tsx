@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SessionProvider } from "next-auth/react";
 import "@/app/globals.css";
 import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
@@ -39,28 +40,30 @@ export default function RootLayout({ children }: RootLayoutProps) {
             className={`${inter.variable} ${notoSansJP.variable}`}
         >
             <body>
-                <div className="lg:flex">
-                    <Sidebar />
-                    <div className={cn(
-                        "px-5",
-                        "md:px-6",
-                        "lg:flex-1 lg:px-10",
-                        "xl:px-0",
-                    )}>
+                <SessionProvider>
+                    <div className="lg:flex">
+                        <Sidebar />
                         <div className={cn(
-                            "flex flex-col h-screen pt-5",
-                            "md:pt-6",
-                            "lg:pt-0",
+                            "px-5",
+                            "md:px-6",
+                            "lg:flex-1 lg:px-10",
+                            "xl:px-0",
                         )}>
-                            <Header />
-                            <main className="flex flex-1 items-center justify-center">
-                                {children}
-                            </main>
+                            <div className={cn(
+                                "flex flex-col min-h-screen pt-5",
+                                "md:pt-6",
+                                "lg:pt-0",
+                            )}>
+                                <Header />
+                                <main className="flex flex-1 items-center justify-center">
+                                    {children}
+                                </main>
+                            </div>
+                            <Footer />
                         </div>
-                        <Footer />
                     </div>
-                </div>
-                <div id="portal" />
+                    <div id="portal" />
+                </SessionProvider>
             </body>
         </html>
     );

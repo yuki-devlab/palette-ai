@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { getSidebarHistory } from "@/actions/get-sidebar-history";
@@ -16,10 +17,12 @@ export default async function Sidebar() {
             "lg:flex",
             "xl:gap-6 xl:p-6 xl:w-80",
         )}>
-            <div className={cn(
-                "w-8 h-8 bg-[#D9D9D9] rounded",
-                "xl:w-10 xl:h-10",
-            )} />
+            <Link href="/">
+                <div className={cn(
+                    "w-8 h-8 bg-[#D9D9D9] rounded",
+                    "xl:w-10 xl:h-10",
+                )} />
+            </Link>
             <div className={cn(
                 "flex flex-1 flex-col gap-4 min-h-0",
                 "xl:gap-5",

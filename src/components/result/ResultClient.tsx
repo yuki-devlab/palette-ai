@@ -49,14 +49,14 @@ export default function ResultClient() {
         if (hasStarted.current) return;
 
         const execute = async () => {
-            const pending = sessionStorage.getItem("generatedColors");
+            const pending = sessionStorage.getItem("generated-colors");
 
             if (pending) {
                 const { id: pendingId, mode: pendingMode, params: pendingParams, lockedColors: pendingLockedColors } = JSON.parse(pending);
 
                 if (pendingId === id) {
                     hasStarted.current = true;
-                    sessionStorage.removeItem("generatedColors");
+                    sessionStorage.removeItem("generated-colors");
                     setMode(pendingMode);
                     setParams(pendingParams || null);
 
@@ -141,7 +141,7 @@ export default function ResultClient() {
     }
 
     return (
-        <div className="flex flex-col gap-6 justify-center min-h-screen mx-auto w-full max-w-5xl py-10 px-4 md:px-10">
+        <div className="flex flex-col gap-6 justify-center mx-auto w-full max-w-5xl py-10 px-4 md:px-10">
             <ResultHeader
                 mode={mode}
                 status={status}

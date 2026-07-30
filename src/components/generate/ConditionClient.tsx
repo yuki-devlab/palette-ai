@@ -22,7 +22,7 @@ export default function ConditionClient() {
 
         const historyId = nanoid(15);
 
-        sessionStorage.setItem("generatedColors", JSON.stringify({
+        sessionStorage.setItem("generated-colors", JSON.stringify({
             id: historyId,
             mode: "condition",
             params: conditions,
@@ -33,7 +33,7 @@ export default function ConditionClient() {
 
     return (
         <div className={`
-            flex flex-col gap-16 justify-center flex-1 mx-auto px-4 w-full
+            flex flex-col gap-16 justify-center flex-1 mx-auto px-4 w-full max-w-xl
             md:w-fit
         `}>
             <Link
@@ -70,7 +70,7 @@ export default function ConditionClient() {
                     }}
                     className={`
                         bg-slate-200 border border-slate-400 p-5 rounded-lg text-sm w-full focus:border-slate-800 focus:outline-none
-                        md:w-lg md:px-6
+                        md:px-6
                     `}
                 />
                 <button

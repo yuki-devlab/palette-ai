@@ -80,7 +80,7 @@ export default function RemainingClient() {
             accent: colors.accent || null,
         };
 
-        sessionStorage.setItem("generatedColors", JSON.stringify({
+        sessionStorage.setItem("generated-colors", JSON.stringify({
             id: historyId,
             mode: "remaining",
             lockedColors,

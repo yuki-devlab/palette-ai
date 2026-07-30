@@ -15,7 +15,7 @@ export default function ResultHeader({ mode, status, isLogin }: ResultHeaderProp
     const router = useRouter();
 
     const handleNavigate = () => {
-        if (mode === "random") {
+        if (mode === "auto") {
             router.push("/");
         } else {
             router.push(`/generate/${mode}`);

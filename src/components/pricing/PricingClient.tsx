@@ -12,7 +12,9 @@ export default function PricingClient() {
     const handleCheckout = () => {
         startTransition(async () => {
             try {
-                const { url } = await createCheckoutSession(isYearly ? "yearly" : "monthly");
+                const { url } = await createCheckoutSession({
+                    plan: isYearly ? "yearly" : "monthly"
+                });
 
                 if (url) {
                     window.location.href = url;
@@ -110,14 +112,14 @@ export default function PricingClient() {
                                             ¥
                                         </span>
                                         <span className="font-bold text-4xl [text-box:trim-both_cap_alphabetic]">
-                                            {isYearly ? "375" : "500"}
+                                            {isYearly ? "500" : "675"}
                                         </span>
                                         <span className="[text-box:trim-both_cap_alphabetic]">
                                             / 月
                                         </span>
                                     </p>
                                     <span className="bg-slate-200 p-3 rounded-full [text-box:trim-both_cap_alphabetic] text-slate-500 text-xs">
-                                        {isYearly ? "¥4,500 年払い" : "月払い"}
+                                        {isYearly ? "¥6,000 年払い" : "月払い"}
                                     </span>
                                 </div>
                             </div>
