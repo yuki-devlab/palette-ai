@@ -1,6 +1,5 @@
-import type { Metadata, Viewport } from "next";
-import { SessionProvider } from "next-auth/react";
 import "@/app/globals.css";
+import type { Metadata, Viewport } from "next";
 import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/Footer";
@@ -28,9 +27,6 @@ export const metadata: Metadata = {
         default: "Palette AI | クリエイターのための配色支援ツール",
         template: "%s | Palette AI",
     },
-    verification: {
-        google: "pcO7KAV3YtM4v2Nr0fXYE6Zx9RIGMtkQAR27MVFEH0w",
-    },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -40,30 +36,26 @@ export default function RootLayout({ children }: RootLayoutProps) {
             className={`${inter.variable} ${notoSansJP.variable}`}
         >
             <body>
-                <SessionProvider>
-                    <div className="lg:flex">
-                        <Sidebar />
+                <div className="flex">
+                    <Sidebar />
+                    <div className={cn(
+                        "flex-1 px-5",
+                        "md:px-8",
+                    )}>
                         <div className={cn(
-                            "px-5",
-                            "md:px-6",
-                            "lg:flex-1 lg:px-10",
-                            "xl:px-0",
+                            "flex flex-col items-center min-h-screen pt-5",
+                            "md:pt-8",
+                            "lg:pt-0",
                         )}>
-                            <div className={cn(
-                                "flex flex-col min-h-screen pt-5",
-                                "md:pt-6",
-                                "lg:pt-0",
-                            )}>
-                                <Header />
-                                <main className="flex flex-1 items-center justify-center">
-                                    {children}
-                                </main>
-                            </div>
-                            <Footer />
+                            <Header />
+                            <main className="flex-1 py-16">
+                                {children}
+                            </main>
                         </div>
+                        <Footer />
                     </div>
-                    <div id="portal" />
-                </SessionProvider>
+                </div>
+                <div id="portal" />
             </body>
         </html>
     );
