@@ -48,7 +48,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                             "lg:pt-0",
                         )}>
                             <Header />
-                            <main className="flex-1 py-16">
+                            <main className="flex flex-1 w-full">
                                 {children}
                             </main>
                         </div>
