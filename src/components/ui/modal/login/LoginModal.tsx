@@ -1,8 +1,11 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Close } from "@material-symbols-svg/react/w700";
+import { Close } from "@material-symbols-svg/react";
 import { cn } from "@/lib/utils";
 import { login } from "@/actions/auth";
+import CloseButton from "@/components/ui/modal/login/_components/CloseButton";
 import LoginButton from "@/components/ui/modal/login/_components/LoginButton";
 
 type LoginModalProps = {
@@ -12,6 +15,8 @@ type LoginModalProps = {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [mounted, setMounted] = useState(false);
+    const [isRendered, setIsRendered] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -19,17 +24,27 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     useEffect(() => {
         if (isOpen) {
+            setIsRendered(true);
             document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
 
-        return () => {
+            const timer = setTimeout(() => {
+                setIsVisible(true);
+            }, 10);
+
+            return () => clearTimeout(timer);
+        } else {
+            setIsVisible(false);
             document.body.style.overflow = "";
-        };
+
+            const timer = setTimeout(() => {
+                setIsRendered(false);
+            }, 150);
+
+            return () => clearTimeout(timer);
+        }
     }, [isOpen]);
 
-    if (!mounted) {
+    if (!mounted || !isRendered) {
         return null;
     }
 
@@ -42,74 +57,31 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     return createPortal(
         <div className={cn(
             "fixed flex inset-0 items-center justify-center px-5",
-            isOpen ? "pointer-events-auto" : "pointer-events-none",
-            "md:p-0",
+            isVisible ? "pointer-events-auto" : "pointer-events-none",
+            "md:px-0",
         )}>
             <div
                 className={cn(
-                    "backdrop-blur-md bg-slate-500/25 fixed inset-0",
-                    isOpen ? "opacity-100" : "opacity-0",
+                    "backdrop-blur-lg bg-slate-500/25 fixed inset-0 transition-all",
+                    isVisible ? "opacity-100" : "opacity-0",
                 )}
                 onClick={onClose}
-            >
-                <button
-                    type="button"
-                    className={cn(
-                        "absolute bg-slate-400 flex h-9 items-center justify-center right-5 rounded-full top-5 w-9",
-                        "hover:bg-slate-500",
-                        "md:h-10 md:right-6 md:top-6 md:w-10",
-                        "lg:h-8 lg:right-5 lg:top-5 lg:w-8",
-                        "xl:h-10 xl:right-6 xl:top-6 xl:w-10",
-                    )}
-                    onClick={onClose}
-                >
-                    <Close
-                        color="var(--color-white)"
-                        className={cn(
-                            "h-5 w-5",
-                            "lg:h-4.5 lg:w-4.5",
-                            "xl:h-5 xl:w-5",
-                        )}
-                    />
-                </button>
-            </div>
+            />
             <div className={cn(
-                "bg-white max-w-86 origin-bottom p-2 rounded-4xl shadow-2xl w-full z-10",
-                isOpen ? "opacity-100 scale-100" : "opacity-0 scale-50",
-                "md:max-w-none md:w-sm",
-                "lg:w-xs",
+                "bg-white flex flex-col gap-5 items-end origin-bottom p-5 rounded-4xl shadow-2xl transition-all w-full z-10",
+                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-50",
+                "md:gap-6 md:p-6 md:w-sm",
                 "xl:w-md",
             )}>
-                <div className={cn(
-                    "bg-sky-100 flex h-36 items-center justify-center rounded-t-3xl",
-                    "md:h-45",
-                    "lg:h-38",
-                    "xl:h-55",
-                )}>
-                    {/* Logo */}
-                </div>
-                <div className={cn(
-                    "flex flex-col gap-6 items-center pb-4 pt-6 px-4",
-                    "lg:gap-5 lg:pb-3 lg:pt-5 lg:px-3",
-                    "xl:gap-7 xl:pb-5 xl:pt-7 xl:px-5",
-                )}>
-                    <h2 className={cn(
-                        "font-bold [text-box:trim-both_cap_alphabetic] text-lg",
-                        "md:text-xl",
-                        "lg:text-base",
-                        "xl:text-xl",
-                    )}>
+                <CloseButton onClick={onClose} />
+                <div className="flex flex-col gap-6 items-center w-full">
+                    <h2 className="font-bold text-[22px] [text-box:trim-both_cap_alphabetic]">
                         Palette AIへようこそ！
                     </h2>
-                    <p className={cn(
-                        "text-[11px] leading-relaxed [text-box:trim-both_cap_alphabetic] text-center text-slate-500",
-                        "md:text-xs",
-                        "lg:text-[10px]",
-                        "xl:text-sm",
-                    )}>
+                    <p className="leading-relaxed [text-box:trim-both_cap_alphabetic] text-center text-slate-500 text-sm">
                         ログインすると、生成履歴を保存できます。
                         <br />
-                        保存した履歴は、いつでもどこからでも確認できます。
+                        保存された履歴は、いつでもどこからでも確認できます。
                     </p>
                     <form
                         action={login}
