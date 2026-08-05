@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Close } from "@material-symbols-svg/react";
 import { cn } from "@/lib/utils";
 import { login } from "@/actions/auth";
 import CloseButton from "@/components/ui/modal/login/_components/CloseButton";
