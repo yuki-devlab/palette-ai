@@ -1,8 +1,13 @@
+import { cn } from "@/lib/utils";
+
 export default function LoginButton() {
     return (
         <button
             type="button"
-            className="bg-slate-100 font-bold h-10 px-3.5 rounded-xl text-[15px]"
+            className={cn(
+                "bg-slate-100 font-bold h-10 px-4 rounded-xl text-sm",
+                "hover:bg-slate-200",
+            )}
         >
             ログイン
         </button>
