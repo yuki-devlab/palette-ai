@@ -1,35 +1,18 @@
-"use client";
-
-import { useState } from "react";
 import { Menu } from "@material-symbols-svg/react";
-import SidebarDrawer from "@/components/ui/drawer/SidebarDrawer";
+import { cn } from "@/lib/utils";
 
 export default function HamburgerMenu() {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const openDrawer = () => {
-        setIsOpen(true);
-    };
-
-    const closeDrawer = () => {
-        setIsOpen(false);
-    }
-
     return (
-        <>
-            <button
-                type="button"
-                onClick={openDrawer}
-            >
-                <Menu
-                    size={28}
-                    color="var(--color-slate-400)"
-                />
-            </button>
-            <SidebarDrawer
-                isOpen={isOpen}
-                onClose={closeDrawer}
+        <button
+            type="button"
+        >
+            <Menu
+                color="var(--color-slate-400)"
+                className={cn(
+                    "h-7 w-7",
+                    "md:h-8 md:w-8",
+                )}
             />
-        </>
+        </button>
     );
 }
