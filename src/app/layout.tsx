@@ -39,7 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <div className="flex">
                     <Sidebar />
                     <div className={cn(
-                        "flex-1 px-4",
+                        "flex-1 px-5",
                         "md:px-8",
                     )}>
                         <div className={cn(
