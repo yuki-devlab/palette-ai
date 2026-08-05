@@ -9,7 +9,7 @@ export default async function Header() {
 
     return (
         <header className={cn(
-            "bg-white flex items-center justify-between px-4 py-2.5 relative rounded-[20px] shadow-sm w-full",
+            "bg-white flex items-center justify-between px-4 py-2 relative rounded-[20px] shadow-sm w-full",
             "md:w-lg",
             "lg:hidden",
         )}>
