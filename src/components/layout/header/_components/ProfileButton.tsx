@@ -25,13 +25,13 @@ export default function ProfileButton({ user, isPro }: ProfileButtonProps) {
         <>
             <button
                 type="button"
-                className="border border-slate-300 p-0.5 rounded-full"
+                className="border border-slate-300 group p-0.5 rounded-full"
                 onClick={openModal}
             >
                 <Image
                     src={user.image || "/default-avatar.png"}
-                    width={32}
-                    height={32}
+                    width={34}
+                    height={34}
                     alt="プロフィール画像"
                     className="rounded-full"
                 />
