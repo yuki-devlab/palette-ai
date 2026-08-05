@@ -43,7 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         "md:px-8",
                     )}>
                         <div className={cn(
-                            "flex flex-col items-center min-h-screen pt-4",
+                            "flex flex-col items-center min-h-screen pt-5",
                             "md:pt-8",
                             "lg:pt-0",
                         )}>
