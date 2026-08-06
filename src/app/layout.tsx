@@ -38,17 +38,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <body>
                 <div className="flex">
                     <Sidebar />
-                    <div className={cn(
-                        "flex-1 px-5",
-                        "md:px-8",
-                    )}>
-                        <div className={cn(
-                            "flex flex-col items-center min-h-screen pt-5",
-                            "md:pt-8",
-                            "lg:pt-0",
-                        )}>
-                            <Header />
-                            <main className="flex flex-1 w-full">
+                    <div className="flex-1">
+                        <div className="min-h-screen">
+                            <div className={cn(
+                                "flex justify-center pt-5 px-5",
+                                "md:pt-8 md:px-0",
+                            )}>
+                                <Header />
+                            </div>
+                            <main className="flex-1 py-16">
                                 {children}
                             </main>
                         </div>
