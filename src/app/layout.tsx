@@ -47,7 +47,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                             )}>
                                 <Header />
                             </div>
-                            <main className="flex flex-1 py-16">
+                            <main className={cn(
+                                "flex flex-1 py-16",
+                                "xl:py-30",
+                            )}>
                                 {children}
                             </main>
                         </div>
