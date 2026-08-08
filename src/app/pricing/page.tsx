@@ -1,4 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
+import { getSubscriptionStatus } from "@/lib/subscription-status";
 import { cn } from "@/lib/utils";
 import PricingContainer from "@/app/pricing/_components/PricingContainer";
 
@@ -8,14 +9,16 @@ export const metadata = createMetadata({
     path: "/pricing",
 });
 
-export default function PricingPage() {
+export default async function PricingPage() {
+    const { isPro } = await getSubscriptionStatus();
+
     return (
         <div className={cn(
             "flex flex-col gap-10 items-center justify-center px-5 w-full",
             "md:px-8",
             "xl:px-0",
         )}>
-            <PricingContainer />
+            <PricingContainer isPro={isPro} />
         </div>
     );
 }
