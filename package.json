@@ -10,6 +10,7 @@
   "dependencies": {
     "@ai-sdk/openai": "^4.0.11",
     "@auth/prisma-adapter": "^2.11.2",
+    "@marsidev/react-turnstile": "^1.5.5",
     "@material-symbols-svg/react": "^0.8.0",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",

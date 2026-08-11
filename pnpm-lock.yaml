@@ -14,6 +14,9 @@ importers:
       '@auth/prisma-adapter':
         specifier: ^2.11.2
         version: 2.11.2(@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3))(typescript@5.9.3))
+      '@marsidev/react-turnstile':
+        specifier: ^1.5.5
+        version: 1.5.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@material-symbols-svg/react':
         specifier: ^0.8.0
         version: 0.8.0(react@19.2.0)
@@ -524,6 +527,12 @@ packages:
 
   '@kurkle/color@0.3.4':
     resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+
+  '@marsidev/react-turnstile@1.5.5':
+    resolution: {integrity: sha512-+EtXbmsJwlRuIUruLb3UBAakpW0wFGeA17QQp0uG8Mv+Zh8MXktZT68P5HS2g1ssfeRd2+BZGupOE/F4KGajFQ==}
+    peerDependencies:
+      react: ^17.0.2 || ^18.0.0 || ^19.0
+      react-dom: ^17.0.2 || ^18.0.0 || ^19.0
 
   '@material-symbols-svg/react@0.8.0':
     resolution: {integrity: sha512-8rCMdmN+cnNDZWmkAvkMT3/tVXFQD4lXNWtBaiLK48j2ckj9iRHAZv0hq9IdtEaLrLVMQ6nXIOcrp6WoP7CFKQ==}
@@ -1965,6 +1974,11 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.5
 
   '@kurkle/color@0.3.4': {}
+
+  '@marsidev/react-turnstile@1.5.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   '@material-symbols-svg/react@0.8.0(react@19.2.0)':
     dependencies:
