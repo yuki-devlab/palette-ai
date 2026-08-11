@@ -6,11 +6,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
 }
 
-export default function FormInput({
-    required,
-    label,
-    ...props
-}: FormInputProps) {
+export default function FormInput({ required, label, ...props }: FormInputProps) {
     const inputId = useId();
     
     return (

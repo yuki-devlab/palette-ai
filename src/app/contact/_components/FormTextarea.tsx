@@ -6,11 +6,7 @@ interface FormTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEle
     label: string;
 }
 
-export default function FormTextarea({
-    required,
-    label,
-    ...props
-}: FormTextareaProps) {
+export default function FormTextarea({ required, label, ...props }: FormTextareaProps) {
     const textareaId = useId();
 
     return (
