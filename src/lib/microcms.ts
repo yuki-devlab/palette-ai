@@ -1,10 +1,6 @@
 import { createClient } from "microcms-js-sdk";
 import { Category, News } from "@/types/news";
 
-type GetNewsParams = {
-    categoryId?: string;
-};
-
 export const client = createClient({
     serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN || "",
     apiKey: process.env.MICROCMS_API_KEY || "",
@@ -18,7 +14,7 @@ export async function getCategories() {
     return data.contents;
 }
 
-export async function getNews({ categoryId }: GetNewsParams) {
+export async function getNews(categoryId?: string) {
     const data = await client.getList<News>({
         endpoint: "news",
         queries: {
