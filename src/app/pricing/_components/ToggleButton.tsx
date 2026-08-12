@@ -43,8 +43,10 @@ export default function ToggleButton({ value, onChange }: ToggleButtonProps) {
                 onClick={() => onChange("monthly")}
                 ref={monthlyRef}
                 className={cn(
-                    "font-bold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic]",
-                    value === "monthly" ? "text-slate-800" : "text-slate-500",
+                    "font-bold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
+                    value === "monthly"
+                        ? "text-slate-800"
+                        : "text-slate-500 hover:text-slate-600",
                 )}
             >
                 月ごと
@@ -53,11 +55,13 @@ export default function ToggleButton({ value, onChange }: ToggleButtonProps) {
                 type="button"
                 onClick={() => onChange("yearly")}
                 ref={yearlyRef}
-                className="flex gap-2 h-10 items-center px-4 relative rounded-full"
+                className="flex gap-2 group h-10 items-center px-4 relative rounded-full"
             >
                 <span className={cn(
-                    "font-bold [text-box:trim-both_cap_alphabetic]",
-                    value === "yearly" ? "text-slate-800" : "text-slate-500",
+                    "font-bold [text-box:trim-both_cap_alphabetic] transition-colors",
+                    value === "yearly"
+                        ? "text-slate-800"
+                        : "text-slate-500 group-hover:text-slate-600",
                 )}>
                     年ごと
                 </span>
