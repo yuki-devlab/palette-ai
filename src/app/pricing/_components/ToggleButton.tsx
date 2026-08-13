@@ -43,7 +43,7 @@ export default function ToggleButton({ value, onChange }: ToggleButtonProps) {
                 onClick={() => onChange("monthly")}
                 ref={monthlyRef}
                 className={cn(
-                    "font-bold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
+                    "font-semibold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
                     value === "monthly"
                         ? "text-slate-800"
                         : "text-slate-500 hover:text-slate-600",
@@ -58,14 +58,14 @@ export default function ToggleButton({ value, onChange }: ToggleButtonProps) {
                 className="flex gap-2 group h-10 items-center px-4 relative rounded-full"
             >
                 <span className={cn(
-                    "font-bold [text-box:trim-both_cap_alphabetic] transition-colors",
+                    "font-semibold [text-box:trim-both_cap_alphabetic] transition-colors",
                     value === "yearly"
                         ? "text-slate-800"
                         : "text-slate-500 group-hover:text-slate-600",
                 )}>
                     年ごと
                 </span>
-                <span className="bg-sky-500 font-bold p-2 rounded-full [text-box:trim-both_cap_alphabetic] text-white text-xs">
+                <span className="bg-sky-500 font-semibold p-2 rounded-full [text-box:trim-both_cap_alphabetic] text-white text-xs">
                     -20%
                 </span>
             </button>

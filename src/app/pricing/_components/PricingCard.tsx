@@ -27,7 +27,7 @@ export default function PricingCard({
             "xl:w-90",
         )}>
             <div className="flex flex-col gap-6">
-                <h2 className="font-bold [text-box:trim-both_cap_alphabetic] text-lg">
+                <h2 className="font-semibold [text-box:trim-both_cap_alphabetic] text-lg">
                     <span className={cn(
                         isProPlan
                             ? "bg-clip-text bg-linear-to-br from-sky-400 text-transparent to-sky-500"
@@ -38,10 +38,10 @@ export default function PricingCard({
                 </h2>
                 <div className="flex gap-2 items-center">
                     <div className="flex gap-1 items-end">
-                        <span className="font-bold text-2xl [text-box:trim-both_cap_alphabetic]">
+                        <span className="font-semibold text-2xl [text-box:trim-both_cap_alphabetic]">
                             ¥
                         </span>
-                        <span className="font-bold text-4xl [text-box:trim-both_cap_alphabetic]">
+                        <span className="font-semibold text-4xl [text-box:trim-both_cap_alphabetic]">
                             {price}
                         </span>
                         <span className="[text-box:trim-both_cap_alphabetic]">

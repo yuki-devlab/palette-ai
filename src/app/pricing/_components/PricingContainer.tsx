@@ -43,7 +43,7 @@ export default function PricingContainer({ isPro }: PricingContainerProps) {
     return (
         <>
             <div className="flex flex-col gap-8 items-center">
-                <h1 className="font-bold text-3xl [text-box:trim-both_cap_alphabetic]">
+                <h1 className="font-semibold text-3xl [text-box:trim-both_cap_alphabetic]">
                     料金プラン
                 </h1>
                 <ToggleButton

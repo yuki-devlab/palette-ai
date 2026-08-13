@@ -46,14 +46,14 @@ export default function SubscribeButton({ planType, isPro }: SubscribeButtonProp
             {isLoading ? (
                 <>
                     <div className="animate-spin border-3 border-t-white border-white/25 h-5 rounded-full w-5" />
-                    <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
+                    <span className="font-semibold [text-box:trim-both_cap_alphabetic] text-white">
                         Proプランをはじめる
                     </span>
                 </>
             ) : (
                 <>
                     <div />
-                    <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
+                    <span className="font-semibold [text-box:trim-both_cap_alphabetic] text-white">
                         {isPro ? "契約中" : "Proプランをはじめる"}
                     </span>
                     <div className="flex justify-center">
