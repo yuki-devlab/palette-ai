@@ -16,7 +16,7 @@ export default function FaqPage() {
             "md:px-8",
             "xl:px-0 xl:w-auto",
         )}>
-            <h1 className="font-bold text-3xl [text-box:trim-both_cap_alphabetic]">
+            <h1 className="font-semibold text-3xl [text-box:trim-both_cap_alphabetic]">
                 よくある質問
             </h1>
             <div className="flex flex-col gap-8 w-full">

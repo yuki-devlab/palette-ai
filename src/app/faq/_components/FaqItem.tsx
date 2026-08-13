@@ -27,7 +27,7 @@ export default function FaqItem({ question, answer }: FaqItemProps) {
                 onClick={toggleOpen}
                 className="flex gap-4 items-center p-4 w-full"
             >
-                <span className="flex-1 font-bold leading-relaxed [text-box:trim-both_cap_alphabetic] text-left">
+                <span className="flex-1 font-semibold leading-relaxed [text-box:trim-both_cap_alphabetic] text-left">
                     {question}
                 </span>
                 <KeyboardArrowDown
