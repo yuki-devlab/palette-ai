@@ -1,3 +1,4 @@
+import { createMetadata } from "@/lib/metadata";
 import { getCategories, getNews } from "@/lib/microcms";
 import { cn } from "@/lib/utils";
 import NewsCard from "@/app/news/_components/NewsCard";
@@ -6,6 +7,12 @@ import ToggleButton from "@/app/news/_components/ToggleButton";
 type NewsPageProps = {
     searchParams: Promise<{ category?: string }>;
 };
+
+export const metadata = createMetadata({
+    title: "お知らせ・更新情報",
+    description: "Palette AIのお知らせ・更新情報ページです。新機能の追加やアップデート内容、障害・メンテナンス情報など、サービスに関する最新情報をお届けします。",
+    path: "/news",
+});
 
 export default async function NewsPage({ searchParams }: NewsPageProps) {
     const { category: currentCategoryId } = await searchParams;
