@@ -46,20 +46,20 @@ export default function NewsCard({ news, isLast }: NewsCardProps) {
                             {formattedDate}
                         </span>
                         <span className={cn(
-                            "font-bold p-2 rounded-md [text-box:trim-both_cap_alphabetic] text-white text-xs w-fit",
+                            "font-semibold p-2 rounded-md [text-box:trim-both_cap_alphabetic] text-white text-xs w-fit",
                             news.category.id === "announcement" ? "bg-sky-500" : "bg-blue-500",
                         )}>
                             {news.category.name}
                         </span>
                     </div>
                     {news.version && (
-                        <span className="font-bold [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
+                        <span className="font-semibold [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
                             {news.version}
                         </span>
                     )}
                 </div>
                 <div className="flex flex-col gap-5">
-                    <h2 className="font-bold [text-box:trim-both_cap_alphabetic] text-lg">
+                    <h2 className="font-semibold [text-box:trim-both_cap_alphabetic] text-lg">
                         {news.title}
                     </h2>
                     {news.description && (

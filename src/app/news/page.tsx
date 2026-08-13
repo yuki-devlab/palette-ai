@@ -28,7 +28,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             "xl:px-0 xl:w-auto",
         )}>
             <div className="flex flex-col gap-8 items-center">
-                <h1 className="font-bold text-3xl [text-box:trim-both_cap_alphabetic]">
+                <h1 className="font-semibold text-3xl [text-box:trim-both_cap_alphabetic]">
                     お知らせ・更新情報
                 </h1>
                 <ToggleButton

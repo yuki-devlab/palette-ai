@@ -71,7 +71,7 @@ export default function ToggleButton({ categories, currentCategoryId = "" }: Tog
                             buttonRef.current[category.id] = el;
                         }}
                         className={cn(
-                            "font-bold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
+                            "font-semibold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
                             isActive
                                 ? "text-slate-800"
                                 : "text-slate-500 hover:text-slate-600",
