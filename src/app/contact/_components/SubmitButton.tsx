@@ -18,7 +18,7 @@ export default function SubmitButton() {
             {pending && (
                 <div className="animate-spin border-3 border-t-white border-white/25 h-5 rounded-full w-5" />
             )}
-            <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
+            <span className="font-semibold [text-box:trim-both_cap_alphabetic] text-white">
                 {pending ? "送信中" : "送信する"}
             </span>
         </button>

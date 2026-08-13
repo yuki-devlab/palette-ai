@@ -15,11 +15,11 @@ export default function FormTextarea({ required, label, ...props }: FormTextarea
                 htmlFor={textareaId}
                 className="flex gap-1"
             >
-                <span className="font-bold [text-box:trim-both_cap_alphabetic]">
+                <span className="font-semibold [text-box:trim-both_cap_alphabetic]">
                     {label}
                 </span>
                 {required && (
-                    <span className="font-bold [text-box:trim-both_cap_alphabetic] text-red-500">
+                    <span className="font-semibold [text-box:trim-both_cap_alphabetic] text-red-500">
                         *
                     </span>
                 )}
