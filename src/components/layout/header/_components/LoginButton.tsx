@@ -19,11 +19,11 @@ export default function LoginButton() {
         <>
             <button
                 type="button"
+                onClick={openModal}
                 className={cn(
-                    "bg-slate-100 font-bold h-10 px-4 rounded-xl text-sm",
+                    "bg-slate-100 font-semibold h-10 px-4 rounded-xl text-sm transition-colors",
                     "hover:bg-slate-200",
                 )}
-                onClick={openModal}
             >
                 ログイン
             </button>
