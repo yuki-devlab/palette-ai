@@ -1,19 +1,17 @@
 import type { Session } from "next-auth";
-import { getSubscriptionStatus } from "@/lib/subscription-status";
+import AccountSettingsButton from "@/components/layout/header/_components/AccountSettingsButton";
 import LoginButton from "@/components/layout/header/_components/LoginButton";
-import ProfileButton from "@/components/layout/header/_components/ProfileButton";
 
 type AuthButtonProps = {
     user?: Session["user"];
+    isPro: boolean;
 };
 
-export default async function AuthButton({ user }: AuthButtonProps) {
-    const { isPro } = await getSubscriptionStatus();
-
+export default function AuthButton({ user, isPro }: AuthButtonProps) {
     return (
         <>
             {user ? (
-                <ProfileButton
+                <AccountSettingsButton
                     user={user}
                     isPro={isPro}
                 />
