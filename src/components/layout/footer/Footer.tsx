@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { navigation } from "@/components/layout/footer/_data/navigation";
 import { cn } from "@/lib/utils";
 import FooterNav from "@/components/layout/footer/_components/FooterNav";
@@ -17,7 +18,12 @@ export default function Footer() {
                     "xl:flex-row xl:justify-between",
                 )}>
                     <div className="flex flex-col gap-4">
-                        <div className="w-30 h-7 bg-[#D9D9D9]" />
+                        <Link
+                            href="/"
+                            className="w-fit"
+                        >
+                            <div className="w-30 h-7 bg-[#D9D9D9]" />
+                        </Link>
                         <span className="leading-normal [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
                             クリエイターのための
                             <br className={cn(
