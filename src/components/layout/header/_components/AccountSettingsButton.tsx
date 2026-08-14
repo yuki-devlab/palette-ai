@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Session } from "next-auth";
+import { cn } from "@/lib/utils";
 import AccountSettingsModal from "@/components/ui/modal/account-settings/AccountSettingsModal";
 
 type AccountSettingsButtonProps = {
@@ -26,14 +27,20 @@ export default function AccountSettingsButton({ user, isPro }: AccountSettingsBu
             <button
                 type="button"
                 onClick={openModal}
-                className="border border-slate-300 p-0.5 rounded-full"
+                className={cn(
+                    "border border-slate-300 group p-0.5 rounded-full transition-colors",
+                    "hover:border-slate-400",
+                )}
             >
                 <Image
                     src={user.image || "/default-avatar.png"}
                     width={34}
                     height={34}
                     alt="アカウント設定"
-                    className="rounded-full"
+                    className={cn(
+                        "rounded-full transition-opacity",
+                        "group-hover:opacity-75",
+                    )}
                 />
             </button>
             <AccountSettingsModal
