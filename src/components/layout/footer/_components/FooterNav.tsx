@@ -21,7 +21,7 @@ export default function FooterNav({ category, links }: FooterNavProps) {
                         <Link
                             href={link.url}
                             className={cn(
-                                "block [text-box:trim-both_cap_alphabetic] text-slate-500 transition-colors w-fit",
+                                "block text-[15px] [text-box:trim-both_cap_alphabetic] text-slate-500 transition-colors w-fit",
                                 "hover:text-slate-800",
                             )}
                         >
