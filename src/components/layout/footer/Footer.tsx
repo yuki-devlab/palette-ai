@@ -7,6 +7,7 @@ export default function Footer() {
     return (
         <footer className={cn(
             "flex justify-center pt-16 px-5",
+            "md:px-8",
             "xl:px-0",
         )}>
             <div className={cn(
