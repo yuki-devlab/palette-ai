@@ -18,7 +18,7 @@ export default function AccountSummary({ user, isPro }: AccountSummaryProps) {
             {isPro ? (
                 <CustomerPortalButton />
             ) : (
-                <UpgradeButton />
+                <UpgradeButton isPro={isPro} />
             )}
         </div>
     );
