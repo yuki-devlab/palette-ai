@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type ToggleButtonProps = {
@@ -6,36 +9,64 @@ type ToggleButtonProps = {
 };
 
 export default function ToggleButton({ isYearly, onChange }: ToggleButtonProps) {
+    const monthlyRef = useRef<HTMLButtonElement>(null);
+    const yearlyRef = useRef<HTMLButtonElement>(null);
+    const [indicatorStyle, setIndicatorStyle] = useState({
+        left: 0,
+        width: 0,
+    });
+
+    useEffect(() => {
+        const activeElement = isYearly
+            ? yearlyRef.current
+            : monthlyRef.current;
+        
+        if (activeElement) {
+            setIndicatorStyle({
+                left: activeElement.offsetLeft,
+                width: activeElement.offsetWidth,
+            });
+        }
+    }, [isYearly]);
+
     return (
-        <div className={cn(
-            "flex p-1 rounded-full bg-slate-200",
-        )}>
+        <div className="bg-slate-200 flex p-1 relative rounded-full">
+            <div
+                className="absolute bg-white h-10 rounded-full transition-all"
+                style={{
+                    left: `${indicatorStyle.left}px`,
+                    width: `${indicatorStyle.width}px`,
+                }}
+            />
             <button
                 type="button"
-                className={cn(
-                    "font-bold text-sm [text-box:trim-both_cap_alphabetic] px-4 h-[stretch] rounded-full",
-                    isYearly ? "bg-slate-200 text-slate-500" : "bg-white text-slate-800",
-                )}
                 onClick={() => onChange(false)}
+                ref={monthlyRef}
+                className={cn(
+                    "font-semibold h-10 px-4 relative rounded-full [text-box:trim-both_cap_alphabetic] transition-colors",
+                    !isYearly
+                        ? "text-slate-800"
+                        : "text-slate-500 hover:text-slate-600",
+                )}
             >
                 月ごと
             </button>
             <button
                 type="button"
-                className={cn(
-                    "flex gap-1 py-2 pr-2 pl-3 rounded-full items-center",
-                    isYearly ? "bg-white" : "bg-slate-200",
-                )}
                 onClick={() => onChange(true)}
+                ref={yearlyRef}
+                className="flex gap-2 group h-10 items-center px-4 relative rounded-full"
             >
                 <span className={cn(
-                    "font-bold text-sm [text-box:trim-both_cap_alphabetic]",
-                    isYearly ? "text-slate-800" : "text-slate-500",
+                    "font-semibold [text-box:trim-both_cap_alphabetic] transition-colors",
+                    isYearly
+                        ? "text-slate-800"
+                        : "text-slate-500 group-hover:text-slate-600",
                 )}>
                     年ごと
                 </span>
-                <span className="font-bold text-[10px] [text-box:trim-both_cap_alphabetic] text-white p-1.75 rounded-full bg-sky-500">
-                    -25%
+                <span className="bg-sky-500 font-semibold p-2 rounded-full [text-box:trim-both_cap_alphabetic] text-white text-xs">
+                    -20%
                 </span>
             </button>
         </div>
