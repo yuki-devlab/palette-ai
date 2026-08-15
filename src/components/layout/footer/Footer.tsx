@@ -21,7 +21,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link
                             href="/"
-                            className="w-fit"
+                            className="self-start"
                         >
                             <div className="w-30 h-7 bg-[#D9D9D9]" />
                         </Link>
