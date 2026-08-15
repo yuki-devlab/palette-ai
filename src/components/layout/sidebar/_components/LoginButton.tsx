@@ -19,12 +19,11 @@ export default function LoginButton() {
         <>
             <button
                 type="button"
-                className={cn(
-                    "bg-sky-500 font-bold py-5 rounded-full [text-box:trim-both_cap_alphabetic] text-white text-xs",
-                    "hover:bg-blue-500",
-                    "xl:py-6 xl:text-sm",
-                )}
                 onClick={openModal}
+                className={cn(
+                    "bg-sky-500 font-semibold py-6 rounded-full [text-box:trim-both_cap_alphabetic] text-white transition-colors",
+                    "hover:bg-blue-500",
+                )}
             >
                 ログイン
             </button>
