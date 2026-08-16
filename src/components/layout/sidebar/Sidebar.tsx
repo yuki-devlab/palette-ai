@@ -7,7 +7,7 @@ import AccountSummary from "@/components/layout/sidebar/_components/AccountSumma
 import EmptyHistory from "@/components/layout/sidebar/_components/EmptyHistory";
 import HistoryItem from "@/components/layout/sidebar/_components/HistoryItem";
 import LoginButton from "@/components/layout/sidebar/_components/LoginButton";
-import { Logo } from "@/components/Logo";
+import { Symbol } from "@/components/Logo";
 
 type SidebarProps = {
     className?: string;
@@ -28,7 +28,7 @@ export default async function Sidebar({ className }: SidebarProps) {
                 href="/"
                 className="self-start"
             >
-                <Logo className="h-10" />
+                <Symbol className="h-10" />
             </Link>
             <div className="flex flex-1 flex-col gap-4">
                 <span className="[text-box:trim-both_cap_alphabetic] text-sm">

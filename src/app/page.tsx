@@ -2,6 +2,7 @@ import { createMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import GenerationMenu from "@/app/_components/GenerationMenu";
 import ArrowIcon from "@/components/icons/ArrowIcon";
+import { Logo } from "@/components/Logo";
 
 export const metadata = createMetadata({
     path: "/",
@@ -18,9 +19,7 @@ export default function HomePage() {
                 "md:px-8",
                 "xl:px-0",
             )}>
-                <div className={cn(
-                    "w-40 h-10 bg-slate-300",
-                )} />
+                <Logo className="h-10" />
                 <p className="[text-box:trim-both_cap_alphabetic] text-center text-slate-500 leading-loose">
                     Palette AIは、ベースカラー・メインカラー・アクセントカラーを自動生成するAIツールです。
                     <br />

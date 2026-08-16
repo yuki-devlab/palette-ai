@@ -23,11 +23,11 @@ export const navigation = [
             },
             {
                 title: "プライバシーポリシー",
-                url: "/privacy",
+                url: "/terms?tab=privacy",
             },
             {
                 title: "特商法表記",
-                url: "/commercial-transactions",
+                url: "/terms?tab=commercial-transactions",
             },
         ],
     },

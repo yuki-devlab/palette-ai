@@ -2,6 +2,7 @@ import Link from "next/link";
 import { navigation } from "@/components/layout/footer/_data/navigation";
 import { cn } from "@/lib/utils";
 import FooterNav from "@/components/layout/footer/_components/FooterNav";
+import { Logo } from "@/components/Logo";
 
 export default function Footer() {
     return (
@@ -18,12 +19,12 @@ export default function Footer() {
                     "flex flex-col gap-12",
                     "xl:flex-row xl:justify-between",
                 )}>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                         <Link
                             href="/"
                             className="self-start"
                         >
-                            <div className="w-30 h-7 bg-[#D9D9D9]" />
+                            <Logo className="h-8" />
                         </Link>
                         <span className="leading-normal [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
                             クリエイターのための
