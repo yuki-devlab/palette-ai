@@ -1,41 +1,39 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
+import { getSubscriptionStatus } from "@/lib/subscription-status";
 import { cn } from "@/lib/utils";
 import { getSidebarHistory } from "@/actions/get-sidebar-history";
 import AccountSummary from "@/components/layout/sidebar/_components/AccountSummary";
-import HistoryItem from "@/components/ui/HistoryItem";
+import EmptyHistory from "@/components/layout/sidebar/_components/EmptyHistory";
+import HistoryItem from "@/components/layout/sidebar/_components/HistoryItem";
 import LoginButton from "@/components/layout/sidebar/_components/LoginButton";
-import Tooltip from "@/components/layout/sidebar/_components/Tooltip";
+import { Symbol } from "@/components/Logo";
 
-export default async function Sidebar() {
+type SidebarProps = {
+    className?: string;
+};
+
+export default async function Sidebar({ className }: SidebarProps) {
     const session = await auth();
+    const { isPro } = await getSubscriptionStatus();
     const histories = await getSidebarHistory();
 
     return (
         <aside className={cn(
-            "bg-white flex-col gap-5 h-screen hidden p-5 sticky top-0 w-70",
-            "lg:flex",
-            "xl:gap-6 xl:p-6 xl:w-80",
+            "bg-white h-screen hidden p-6 sticky top-0 w-75",
+            "lg:flex lg:flex-col lg:gap-6",
+            className,
         )}>
-            <Link href="/">
-                <div className={cn(
-                    "w-8 h-8 bg-[#D9D9D9] rounded",
-                    "xl:w-10 xl:h-10",
-                )} />
+            <Link
+                href="/"
+                className="self-start"
+            >
+                <Symbol className="h-10" />
             </Link>
-            <div className={cn(
-                "flex flex-1 flex-col gap-4 min-h-0",
-                "xl:gap-5",
-            )}>
-                <div className="flex gap-1 items-center">
-                    <h2 className={cn(
-                        "[text-box:trim-both_cap_alphabetic] text-xs",
-                        "xl:text-sm",
-                    )}>
-                        生成履歴
-                    </h2>
-                    <Tooltip />
-                </div>
+            <div className="flex flex-1 flex-col gap-4">
+                <span className="[text-box:trim-both_cap_alphabetic] text-sm">
+                    生成履歴
+                </span>
                 {histories.length > 0 ? (
                     <ul className="flex flex-col gap-2 overflow-y-auto">
                         {histories.map((history) => (
@@ -49,16 +47,14 @@ export default async function Sidebar() {
                         ))}
                     </ul>
                 ) : (
-                    <span className={cn(
-                        "text-[10px] [text-box:trim-both_cap_alphabetic] text-slate-500",
-                        "xl:text-xs",
-                    )}>
-                        なし
-                    </span>
+                    <EmptyHistory />
                 )}
             </div>
             {session?.user ? (
-                <AccountSummary user={session.user} />
+                <AccountSummary
+                    user={session.user}
+                    isPro={isPro}
+                />
             ) : (
                 <LoginButton />
             )}

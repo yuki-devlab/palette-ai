@@ -1,9 +1,12 @@
-export default function ArrowIcon({ className }: { className: string }) {
+import type { SVGProps } from "react";
+
+export default function ArrowIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 38.21 113.924"
             className={className}
+            {...props}
         >
             <path
                 fill="#00A6F4"

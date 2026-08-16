@@ -129,6 +129,10 @@ export default function ResultClient() {
                 }
             });
 
+            if (result && "success" in result && result.success === false) {
+                throw new Error(result.errorType);
+            }
+
             setColorScheme(result as ColorSchemeProps);
             setStatus("success");
         } catch (error) {

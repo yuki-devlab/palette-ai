@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
-import { createCheckoutSession } from "@/actions/stripe";
+import { createCheckoutSession } from "@/actions/stripe-checkout";
 import Link from "next/link";
 
 export default function PricingClient() {

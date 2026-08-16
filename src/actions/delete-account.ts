@@ -7,7 +7,7 @@ import { stripe } from "@/lib/stripe";
 export async function deleteAccount() {
     const session = await auth();
 
-    if (!session?.user.id) {
+    if (!session?.user?.id) {
         throw new Error("ログインしてください");
     }
 
@@ -22,7 +22,9 @@ export async function deleteAccount() {
         });
 
         if (subscription?.subscriptionId) {
-            await stripe.subscriptions.cancel(subscription.subscriptionId);
+            await stripe.subscriptions.cancel(
+                subscription.subscriptionId,
+            );
         }
 
         await prisma.user.delete({
@@ -34,5 +36,7 @@ export async function deleteAccount() {
         throw new Error("アカウントの削除に失敗しました");
     }
 
-    await signOut({ redirectTo: "/" });
+    await signOut({
+        redirectTo: "/",
+    });
 }

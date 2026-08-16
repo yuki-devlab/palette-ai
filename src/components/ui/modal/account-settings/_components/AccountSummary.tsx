@@ -1,7 +1,8 @@
 import Image from "next/image";
 import type { Session } from "next-auth";
 import { cn } from "@/lib/utils";
-import UpgradeButton from "@/components/ui/modal/account-settings/_components/UpgradeButton";
+import CustomerPortalButton from "@/components/ui/CustomerPortalButton";
+import UpgradeButton from "@/components/ui/UpgradeButton";
 
 type AccountSummaryProps = {
     user: Session["user"];
@@ -10,59 +11,36 @@ type AccountSummaryProps = {
 
 export default function AccountSummary({ user, isPro }: AccountSummaryProps) {
     return (
-        <div className={cn(
-            "bg-white p-1 rounded-[20px]",
-            "md:p-1.5",
-            "lg:p-1",
-            "xl:p-1.5",
-        )}>
-            <div className={cn(
-                "bg-sky-100 flex gap-2 items-center p-3 rounded-2xl",
-                "md:p-4",
-                "lg:p-3",
-                "xl:p-4",
-            )}>
-                <div className={cn(
-                    "flex flex-1 gap-1 items-center",
-                    "xl:gap-2",
-                )}>
+        <div className="p-1 rounded-[28px] bg-white">
+            <div className="flex items-center gap-5 p-5 rounded-3xl bg-sky-100">
+                <div className="flex flex-1 gap-2">
                     <Image
                         src={user.image || "/default-avatar.png"}
                         width={44}
                         height={44}
                         alt=""
-                        className={cn(
-                            "h-9 rounded-full w-9",
-                            "md:h-10 md:w-10",
-                            "lg:h-8 lg:w-8",
-                            "xl:h-11 xl:w-11",
-                        )}
+                        className="rounded-full"
                     />
                     <div className={cn(
-                        "flex flex-1 flex-col gap-2 translate-y-[-1.5px]",
-                        "md:translate-y-[-1.25px]",
-                        "lg:-translate-y-px",
-                        "xl:gap-2.5 xl:-translate-y-0.5",
+                        "flex-col flex-1 gap-2.5 hidden",
+                        "min-[430px]:flex",
                     )}>
                         <span className={cn(
-                            "bg-white p-1 rounded-full text-[8px] [text-box:trim-both_cap_alphabetic] text-slate-500 w-fit",
-                            "md:text-[9px]",
-                            "lg:text-[8px]",
-                            "xl:p-1.5 xl:text-[10px]",
+                            "text-[10px] [text-box:trim-both_cap_alphabetic] p-1.5 rounded-full w-fit",
+                            isPro ? "bg-linear-to-r from-sky-400 to-sky-500 text-white" : "bg-white text-slate-500",
                         )}>
                             {isPro ? "Proプラン" : "無料プラン"}
                         </span>
-                        <span className={cn(
-                            "overflow-x-clip pl-1 text-[10px] [text-box:trim-both_cap_alphabetic] text-ellipsis whitespace-nowrap",
-                            "md:text-xs",
-                            "lg:text-[10px]",
-                            "xl:pl-1.5 xl:text-sm",
-                        )}>
+                        <span className="text-sm [text-box:trim-both_cap_alphabetic] pl-1.5 whitespace-nowrap text-ellipsis overflow-x-clip">
                             {user.name}
                         </span>
                     </div>
                 </div>
-                <UpgradeButton />
+                {isPro ? (
+                    <CustomerPortalButton />
+                ) : (
+                    <UpgradeButton isPro={isPro} />
+                )}
             </div>
         </div>
     );

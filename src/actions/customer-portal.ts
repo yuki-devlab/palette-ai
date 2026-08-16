@@ -7,7 +7,7 @@ import { stripe } from "@/lib/stripe";
 export async function createCustomerPortalSession() {
     const session = await auth();
 
-    if (!session?.user.id) {
+    if (!session?.user?.id) {
         throw new Error("ログインしてください");
     }
 
@@ -29,5 +29,7 @@ export async function createCustomerPortalSession() {
         return_url: `${process.env.NEXT_PUBLIC_APP_URL}`,
     });
 
-    return { url: portalSession.url };
+    return {
+        url: portalSession.url,
+    };
 }

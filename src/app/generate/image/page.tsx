@@ -1,7 +1,0 @@
-export default function ImagePage() {
-    return (
-        <p>
-            現在、制作中です…
-        </p>
-    );
-}

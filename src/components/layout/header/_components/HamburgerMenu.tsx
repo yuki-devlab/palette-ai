@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Menu } from "@material-symbols-svg/react";
-import SidebarDrawer from "@/components/ui/drawer/SidebarDrawer";
+import { Menu } from "@material-symbols-svg/react/w700";
+import SidebarDrawer from "@/components/ui/drawer/sidebar/SidebarDrawer";
 
-export default function HamburgerMenu() {
+type HamburgerMenuProps = {
+    children: React.ReactNode;
+};
+
+export default function HamburgerMenu({ children }: HamburgerMenuProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const openDrawer = () => {
@@ -13,7 +17,7 @@ export default function HamburgerMenu() {
 
     const closeDrawer = () => {
         setIsOpen(false);
-    }
+    };
 
     return (
         <>
@@ -22,14 +26,16 @@ export default function HamburgerMenu() {
                 onClick={openDrawer}
             >
                 <Menu
-                    size={28}
+                    size={32}
                     color="var(--color-slate-400)"
                 />
             </button>
             <SidebarDrawer
                 isOpen={isOpen}
                 onClose={closeDrawer}
-            />
+            >
+                {children}
+            </SidebarDrawer>
         </>
     );
 }

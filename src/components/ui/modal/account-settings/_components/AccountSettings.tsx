@@ -14,48 +14,17 @@ export default function AccountSettings() {
     return (
         <div className={cn(
             "flex flex-col gap-3",
-            "xl:gap-4",
         )}>
-            <h2 className={cn(
-                "font-bold [text-box:trim-both_cap_alphabetic] text-slate-500 text-xs",
-                "md:text-sm",
-                "lg:text-xs",
-                "xl:text-sm",
-            )}>
+            <h2 className="font-semibold [text-box:trim-both_cap_alphabetic] text-slate-500 text-sm">
                 アカウント
             </h2>
-            <div className={cn(
-                "bg-white rounded-[20px]",
-                "md:rounded-3xl",
-                "lg:rounded-[20px]",
-                "xl:rounded-3xl",
-            )}>
-                <div className={cn(
-                    "flex gap-3 items-center p-4",
-                    "md:gap-4 md:p-5",
-                    "lg:gap-2 lg:p-4",
-                    "xl:gap-4 xl:p-5",
-                )}>
-                    <div className={cn(
-                        "flex flex-1 flex-col gap-3.5",
-                        "md:gap-4",
-                        "lg:gap-3",
-                        "xl:gap-4",
-                    )}>
-                        <h3 className={cn(
-                            "font-bold text-[13px] [text-box:trim-both_cap_alphabetic]",
-                            "md:text-sm",
-                            "lg:text-xs",
-                            "xl:text-base",
-                        )}>
+            <div className="flex flex-col rounded-3xl bg-white">
+                <div className="flex w-full items-center gap-5 p-5">
+                    <div className="flex flex-col gap-4 flex-1 min-w-0">
+                        <h2 className="font-semibold [text-box:trim-both_cap_alphabetic]">
                             ログアウト
-                        </h3>
-                        <p className={cn(
-                            "text-[10px] leading-relaxed [text-box:trim-both_cap_alphabetic] text-slate-500",
-                            "md:text-[11px]",
-                            "lg:text-[9px]",
-                            "xl:text-xs",
-                        )}>
+                        </h2>
+                        <p className="line-clamp-2 [text-box:trim-both_cap_alphabetic] overflow-clip [overflow-clip-margin:2px] text-[13px] leading-normal text-slate-500">
                             このデバイスからログアウトします。
                         </p>
                     </div>
@@ -63,60 +32,34 @@ export default function AccountSettings() {
                         <button
                             type="submit"
                             className={cn(
-                                "bg-white border border-slate-300 h-8 px-3 rounded-full text-[11px]",
+                                "text-sm [text-box:trim-both_cap_alphabetic] px-5 py-4 rounded-full bg-white border border-slate-300 transition-colors",
                                 "hover:bg-slate-50",
-                                "md:h-10 md:px-4 md:text-xs",
-                                "lg:h-8 lg:px-3 lg:text-[10px]",
-                                "xl:h-11 xl:px-5 xl:text-sm",
                             )}
                         >
                             ログアウト
                         </button>
                     </form>
                 </div>
-                <div className={cn(
-                    "flex gap-3 items-center p-4",
-                    "md:gap-4 md:p-5",
-                    "lg:gap-2 lg:p-4",
-                    "xl:gap-4 xl:p-5",
-                )}>
-                    <div className={cn(
-                        "flex flex-1 flex-col gap-3.5",
-                        "md:gap-4",
-                        "lg:gap-3",
-                        "xl:gap-4",
-                    )}>
-                        <h3 className={cn(
-                            "font-bold text-[13px] [text-box:trim-both_cap_alphabetic]",
-                            "md:text-sm",
-                            "lg:text-xs",
-                            "xl:text-base",
-                        )}>
+                <hr className="border-slate-200 mx-5" />
+                <div className="flex w-full items-center gap-5 p-5 border-b border-slate-200 last:border-b-0">
+                    <div className="flex flex-col gap-4 flex-1 min-w-0">
+                        <h2 className="font-semibold [text-box:trim-both_cap_alphabetic]">
                             アカウントの削除
-                        </h3>
-                        <p className={cn(
-                            "text-[10px] leading-relaxed [text-box:trim-both_cap_alphabetic] text-slate-500",
-                            "md:text-[11px]",
-                            "lg:text-[9px]",
-                            "xl:text-xs",
-                        )}>
+                        </h2>
+                        <p className="line-clamp-2 [text-box:trim-both_cap_alphabetic] overflow-clip [overflow-clip-margin:2px] text-[13px] leading-normal text-slate-500">
                             このアカウントを削除します。一度削除したデータは元に戻せません。
                         </p>
                     </div>
-                    <form action={handleDelete}>
-                        <button
-                            type="submit"
-                            className={cn(
-                                "bg-white border border-slate-300 h-8 px-3 rounded-full text-[11px]",
-                                "hover:bg-slate-50",
-                                "md:h-10 md:px-4 md:text-xs",
-                                "lg:h-8 lg:px-3 lg:text-[10px]",
-                                "xl:h-11 xl:px-5 xl:text-sm",
-                            )}
-                        >
-                            アカウントを削除
-                        </button>
-                    </form>
+                    <button
+                        type="button"
+                        onClick={handleDelete}
+                        className={cn(
+                            "text-sm [text-box:trim-both_cap_alphabetic] px-5 py-4 rounded-full bg-white border border-slate-300 transition-colors",
+                            "hover:bg-slate-50",
+                        )}
+                    >
+                        アカウントを削除
+                    </button>
                 </div>
             </div>
         </div>

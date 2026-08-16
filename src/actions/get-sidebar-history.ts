@@ -2,7 +2,7 @@
 
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { getSubscription } from "@/lib/subscription";
+import { getSubscriptionStatus } from "@/lib/subscription-status";
 
 export async function getSidebarHistory() {
     const session = await auth();
@@ -11,7 +11,7 @@ export async function getSidebarHistory() {
         return [];
     }
 
-    const { isPro } = await getSubscription();
+    const { isPro } = await getSubscriptionStatus();
 
     return await prisma.history.findMany({
         where: {

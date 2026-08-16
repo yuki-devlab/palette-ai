@@ -1,37 +1,25 @@
 import type { Session } from "next-auth";
-import prisma from "@/lib/prisma";
-import { cn } from "@/lib/utils";
-import AccountInfo from "@/components/layout/sidebar/_components/AccountInfo";
-import UpgradeButton from "@/components/layout/sidebar/_components/UpgradeButton";
+import AccountSettingsButton from "@/components/layout/sidebar/_components/AccountSettingsButton";
+import CustomerPortalButton from "@/components/ui/CustomerPortalButton";
+import UpgradeButton from "@/components/ui/UpgradeButton";
 
 type AccountSummaryProps = {
     user: Session["user"];
+    isPro: boolean;
 };
 
-export default async function AccountSummary({ user }: AccountSummaryProps) {
-    const subscription = await prisma.subscription.findUnique({
-        where: {
-            userId: user.id,
-        },
-        select: {
-            currentPeriodEnd: true,
-        },
-    });
-
-    const isPro =
-        !!subscription?.currentPeriodEnd &&
-        subscription.currentPeriodEnd > new Date();
-
+export default function AccountSummary({ user, isPro }: AccountSummaryProps) {
     return (
-        <div className={cn(
-            "flex gap-2 items-center",
-            "xl:gap-3",
-        )}>
-            <AccountInfo
+        <div className="flex items-center justify-between">
+            <AccountSettingsButton
                 user={user}
                 isPro={isPro}
             />
-            {!isPro && <UpgradeButton />}
+            {isPro ? (
+                <CustomerPortalButton />
+            ) : (
+                <UpgradeButton isPro={isPro} />
+            )}
         </div>
     );
 }

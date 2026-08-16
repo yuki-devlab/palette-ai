@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import type { Session } from "next-auth";
 import { Close } from "@material-symbols-svg/react/w700";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,8 @@ type AccountSettingsModalProps = {
 
 export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: AccountSettingsModalProps) {
     const [mounted, setMounted] = useState(false);
+    const [isRendered, setIsRendered] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -23,17 +26,27 @@ export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: A
 
     useEffect(() => {
         if (isOpen) {
+            setIsRendered(true);
             document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
 
-        return () => {
+            const timer = setTimeout(() => {
+                setIsVisible(true);
+            }, 10);
+
+            return () => clearTimeout(timer);
+        } else {
+            setIsVisible(false);
             document.body.style.overflow = "";
-        };
+
+            const timer = setTimeout(() => {
+                setIsRendered(false);
+            }, 150);
+
+            return () => clearTimeout(timer);
+        }
     }, [isOpen]);
 
-    if (!mounted) {
+    if (!mounted || !isRendered) {
         return null;
     }
 
@@ -46,50 +59,51 @@ export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: A
     return createPortal(
         <div className={cn(
             "fixed flex inset-0 items-center justify-center px-5",
-            isOpen ? "pointer-events-auto" : "pointer-events-none",
+            isVisible ? "pointer-events-auto" : "pointer-events-none",
             "md:p-0",
         )}>
             <div
-                className={cn(
-                    "backdrop-blur-md bg-slate-500/25 fixed inset-0",
-                    isOpen ? "opacity-100" : "opacity-0",
-                )}
                 onClick={onClose}
-            >
-                <button
-                    type="button"
-                    className={cn(
-                        "absolute bg-slate-400 flex h-9 items-center justify-center right-5 rounded-full top-5 w-9",
-                        "hover:bg-slate-500",
-                        "md:h-10 md:right-6 md:top-6 md:w-10",
-                        "lg:h-8 lg:right-5 lg:top-5 lg:w-8",
-                        "xl:h-10 xl:right-6 xl:top-6 xl:w-10",
-                    )}
-                    onClick={onClose}
-                >
-                    <Close
-                        color="var(--color-white)"
-                        className={cn(
-                            "h-5 w-5",
-                            "lg:h-4.5 lg:w-4.5",
-                            "xl:h-5 xl:w-5",
-                        )}
-                    />
-                </button>
-            </div>
+                className={cn(
+                    "backdrop-blur-md bg-slate-500/25 fixed inset-0 transition-opacity",
+                    isVisible ? "opacity-100" : "opacity-0",
+                )}
+            />
             <div className={cn(
-                "bg-slate-100 flex flex-col gap-6 max-w-sm origin-bottom px-4 py-5 rounded-4xl shadow-2xl w-full z-10",
-                isOpen ? "opacity-100 scale-100" : "opacity-0 scale-50",
-                "md:gap-7 md:max-w-none md:px-5 md:py-7 md:w-md",
-                "lg:px-4 lg:py-6 lg:w-sm",
-                "xl:px-6 xl:py-8 xl:w-lg",
+                "flex flex-col w-full items-center gap-5 p-5 rounded-4xl bg-slate-100 shadow-2xl transition-all max-w-lg origin-bottom",
+                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-50",
+                "md:w-lg md:gap-6 md:p-6"
             )}>
-                <AccountSummary
-                    user={user}
-                    isPro={isPro}
-                />
-                {isPro && <SubscriptionSettings />}
-                <AccountSettings />
+                <div className="flex flex-col gap-8 w-full">
+                    <AccountSummary
+                        user={user}
+                        isPro={isPro}
+                    />
+                    <AccountSettings />
+                </div>
+                <div className="flex items-center gap-1 text-slate-500 text-sm">
+                    <Link
+                        href="/faq"
+                        className={cn(
+                            "[text-box:trim-both_cap_alphabetic] transition-colors",
+                            "hover:text-slate-800"
+                        )}
+                    >
+                        よくある質問
+                    </Link>
+                    <span className="[text-box:trim-both_cap_alphabetic]">
+                        ・
+                    </span>
+                    <Link
+                        href="/contact"
+                        className={cn(
+                            "[text-box:trim-both_cap_alphabetic] transition-colors",
+                            "hover:text-slate-800"
+                        )}
+                    >
+                        お問い合わせ
+                    </Link>
+                </div>
             </div>
         </div>,
         portal,

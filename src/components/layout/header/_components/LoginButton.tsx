@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import LoginModal from "@/components/ui/modal/login/LoginModal";
 
 export default function LoginButton() {
@@ -18,8 +19,11 @@ export default function LoginButton() {
         <>
             <button
                 type="button"
-                className="bg-slate-200 font-bold p-3 rounded-lg [text-box:trim-both_cap_alphabetic] text-xs"
                 onClick={openModal}
+                className={cn(
+                    "bg-slate-100 font-semibold h-10 px-4 rounded-xl text-sm transition-colors",
+                    "hover:bg-slate-200",
+                )}
             >
                 ログイン
             </button>
