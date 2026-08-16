@@ -61,7 +61,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         )}>
             <div
                 className={cn(
-                    "backdrop-blur-lg bg-slate-500/25 fixed inset-0 transition-all",
+                    "backdrop-blur-md bg-slate-500/25 fixed inset-0 transition-all",
                     isVisible ? "opacity-100" : "opacity-0",
                 )}
                 onClick={onClose}
