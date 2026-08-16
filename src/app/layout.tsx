@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
+import { SessionProvider } from "next-auth/react";
 import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/layout/footer/Footer";
@@ -35,29 +36,31 @@ export default function RootLayout({ children }: RootLayoutProps) {
             lang="ja"
             className={`${inter.variable} ${notoSansJP.variable}`}
         >
-            <body>
-                <div className="flex">
-                    <Sidebar />
-                    <div className="flex-1">
-                        <div className="flex flex-col min-h-screen">
-                            <div className={cn(
-                                "flex justify-center pt-5 px-5",
-                                "md:pt-8 md:px-0",
-                                "lg:hidden",
-                            )}>
-                                <Header />
+            <body suppressHydrationWarning>
+                <SessionProvider>
+                    <div className="flex">
+                        <Sidebar />
+                        <div className="flex-1">
+                            <div className="flex flex-col min-h-screen">
+                                <div className={cn(
+                                    "flex justify-center pt-5 px-5",
+                                    "md:pt-8 md:px-0",
+                                    "lg:hidden",
+                                )}>
+                                    <Header />
+                                </div>
+                                <main className={cn(
+                                    "flex flex-1 py-16",
+                                    "xl:py-30",
+                                )}>
+                                    {children}
+                                </main>
                             </div>
-                            <main className={cn(
-                                "flex flex-1 py-16",
-                                "xl:py-30",
-                            )}>
-                                {children}
-                            </main>
+                            <Footer />
                         </div>
-                        <Footer />
                     </div>
-                </div>
-                <div id="portal" />
+                    <div id="portal" />
+                </SessionProvider>
             </body>
         </html>
     );
