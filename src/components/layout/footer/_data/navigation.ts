@@ -4,10 +4,6 @@ export const navigation = [
         category: "About",
         links: [
             {
-                title: "Palette AIについて",
-                url: "/about",
-            },
-            {
                 title: "お知らせ・更新情報",
                 url: "/news",
             },
