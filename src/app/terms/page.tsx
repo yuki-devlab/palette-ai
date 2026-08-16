@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { createMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import TermsContainer from "@/app/terms/_components/TermsContainer";
@@ -15,7 +16,9 @@ export default function TermsPage() {
             "md:px-8",
             "xl:px-0",
         )}>
-            <TermsContainer />
+            <Suspense>
+                <TermsContainer />
+            </Suspense>
         </div>
     );
 }
