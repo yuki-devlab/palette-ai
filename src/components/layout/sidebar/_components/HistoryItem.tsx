@@ -97,7 +97,7 @@ export default function HistoryItem({ id, baseColor, mainColor, accentColor }: H
                 href={`/generate/result?id=${id}`}
                 ref={linkRef}
                 className={cn(
-                    "flex flex-1 px-5 items-center h-12 rounded-lg transition-colors",
+                    "flex flex-1 px-5 items-center h-12 rounded-xl transition-colors",
                     isActive ? "bg-slate-100" : "",
                     isMenuOpen ? "pointer-events-none" : "hover:bg-slate-100",
                 )}
