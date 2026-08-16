@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
-import ModeCard from "@/components/ui/ModeCard";
+import ModeCard from "@/app/_components/ModeCard";
 
 const MODE_INFO_LIST = [
     {
