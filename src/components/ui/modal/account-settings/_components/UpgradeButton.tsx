@@ -4,7 +4,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import UpgradeModal from "@/components/ui/modal/upgrade/UpgradeModal";
 
-export default function UpgradeButton() {
+type UpgradeButtonProps = {
+    isPro: boolean;
+};
+
+export default function UpgradeButton({ isPro }: UpgradeButtonProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
@@ -33,6 +37,7 @@ export default function UpgradeButton() {
             <UpgradeModal
                 isOpen={isOpen}
                 onClose={closeModal}
+                isPro={isPro}
             />
         </>
     );
