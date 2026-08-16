@@ -36,7 +36,7 @@ export default function ModeCard({ isSelected, modeInfo }: ModeCardProps) {
             className={cn(
                 "flex flex-col w-full bg-white p-2 rounded-4xl shadow transition-all",
                 "hover:shadow-lg hover:-translate-y-1",
-                "lg:flex-row lg:gap-3 lg:items-center lg:pr-3 lg:rounded-md",
+                "lg:flex-row lg:gap-3 lg:items-center lg:pr-4 lg:rounded-md",
                 "xl:gap-4 xl:w-102",
             )}
             onClick={modeInfo.id === "auto" ? handleNavigate : undefined}
@@ -57,12 +57,14 @@ export default function ModeCard({ isSelected, modeInfo }: ModeCardProps) {
                 )}>
                     {modeInfo.title}
                 </h2>
-                <p className={cn(
-                    "[text-box:trim-both_cap_alphabetic] text-slate-500 text-[15px] leading-relaxed whitespace-pre-line",
-                    "lg:text-[13px] lg:line-clamp-2 lg:overflow-clip lg:[overflow-clip-margin:2px]",
-                )}>
-                    {modeInfo.description}
-                </p>
+                <div className="lg:line-clamp-2 lg:overflow-clip lg:[overflow-clip-margin:2px]">
+                    <p className={cn(
+                        "[text-box:trim-both_cap_alphabetic] text-slate-500 text-[15px] leading-relaxed whitespace-pre-line",
+                        "lg:text-[13px]",
+                    )}>
+                        {modeInfo.description}
+                    </p>
+                </div>
             </div>
         </Link>
     );
