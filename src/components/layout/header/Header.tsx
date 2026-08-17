@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import AuthButton from "@/components/layout/header/_components/AuthButton";
 import HamburgerMenu from "@/components/layout/header/_components/HamburgerMenu";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
+import { Symbol } from "@/components/Logo";
 
 export default async function Header() {
     const session = await auth();
@@ -25,7 +26,7 @@ export default async function Header() {
                 href="/"
                 className="absolute left-1/2 -translate-x-1/2"
             >
-                <div className="w-10 h-10 rounded-lg bg-[#D9D9D9]" />
+                <Symbol className="h-10" />
             </Link>
             <AuthButton
                 user={session?.user}
