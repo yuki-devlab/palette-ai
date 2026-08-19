@@ -6,7 +6,6 @@ import { nanoid } from "nanoid";
 import { cn } from "@/lib/utils";
 
 type ModeCardProps = {
-    isSelected: boolean,
     modeInfo: {
         id: string;
         title: string;
@@ -14,7 +13,7 @@ type ModeCardProps = {
     },
 };
 
-export default function ModeCard({ isSelected, modeInfo }: ModeCardProps) {
+export default function ModeCard({ modeInfo }: ModeCardProps) {
     const router = useRouter();
 
     const handleNavigate = (e: React.MouseEvent) => {

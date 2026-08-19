@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import ModeCard from "@/app/_components/ModeCard";
@@ -29,8 +29,6 @@ const MODE_INFO_LIST = [
 ] as const;
 
 export default function GenerationMenu() {
-    const [selectedIndex, setSelectedIndex] = useState(0);
-
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "center",
         breakpoints: {
@@ -43,8 +41,6 @@ export default function GenerationMenu() {
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
-
-        setSelectedIndex(emblaApi.selectedScrollSnap());
     }, [emblaApi]);
 
     useEffect(() => {
@@ -78,7 +74,6 @@ export default function GenerationMenu() {
                         )}
                     >
                         <ModeCard
-                            isSelected={index === selectedIndex}
                             modeInfo={modeInfo}
                         />
                     </div>

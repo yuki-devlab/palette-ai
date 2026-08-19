@@ -27,7 +27,7 @@ export async function generateColor({
     lockedColors,
 }: GenerateColorProps) {
     const session = await auth();
-    const { isPro } = await getSubscriptionStatus();
+    const { isPro } = await getSubscriptionStatus(session?.user?.id);
 
     const generationLimit = isPro ? 100 : 10;
     const aiModel = isPro ? "gpt-5.4-mini" : "gpt-4o-mini";

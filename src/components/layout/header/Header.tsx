@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { auth } from "@/lib/auth";
-import { getSubscriptionStatus } from "@/lib/subscription-status";
+import { getNavigationData } from "@/lib/navigation-data";
 import { cn } from "@/lib/utils";
 import AuthButton from "@/components/layout/header/_components/AuthButton";
 import HamburgerMenu from "@/components/layout/header/_components/HamburgerMenu";
@@ -8,8 +7,7 @@ import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { Symbol } from "@/components/Logo";
 
 export default async function Header() {
-    const session = await auth();
-    const { isPro } = await getSubscriptionStatus();
+    const { session, isPro } = await getNavigationData();
 
     return (
         <header className={cn(

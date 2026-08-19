@@ -1,10 +1,7 @@
-import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
-export async function getSubscriptionStatus() {
-    const session = await auth();
-
-    if (!session?.user?.id) {
+export async function getSubscriptionStatus(userId?: string | null) {
+    if (!userId) {
         return {
             isPro: false,
         };
@@ -12,7 +9,7 @@ export async function getSubscriptionStatus() {
 
     const subscription = await prisma.subscription.findUnique({
         where: {
-            userId: session.user.id,
+            userId,
         },
         select: {
             currentPeriodEnd: true,
@@ -21,7 +18,7 @@ export async function getSubscriptionStatus() {
 
     const isPro =
         !!subscription &&
-        subscription.currentPeriodEnd.getTime() + (24 * 60 * 60 * 1000) > Date.now();
+        subscription.currentPeriodEnd.getTime() + 86_400_000 > Date.now();
     
     return { isPro };
 }

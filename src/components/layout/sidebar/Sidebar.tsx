@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { auth } from "@/lib/auth";
-import { getSubscriptionStatus } from "@/lib/subscription-status";
 import { cn } from "@/lib/utils";
-import { getSidebarHistory } from "@/actions/get-sidebar-history";
+import { getNavigationData } from "@/lib/navigation-data";
 import AccountSummary from "@/components/layout/sidebar/_components/AccountSummary";
 import EmptyHistory from "@/components/layout/sidebar/_components/EmptyHistory";
 import HistoryItem from "@/components/layout/sidebar/_components/HistoryItem";
@@ -14,9 +12,7 @@ type SidebarProps = {
 };
 
 export default async function Sidebar({ className }: SidebarProps) {
-    const session = await auth();
-    const { isPro } = await getSubscriptionStatus();
-    const histories = await getSidebarHistory();
+    const { session, isPro, histories } = await getNavigationData();
 
     return (
         <aside className={cn(
