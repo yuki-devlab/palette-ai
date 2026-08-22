@@ -26,7 +26,7 @@ export default async function Sidebar({ className }: SidebarProps) {
             >
                 <Symbol className="h-10" />
             </Link>
-            <div className="flex flex-1 flex-col gap-4">
+            <div className="flex flex-1 flex-col gap-4 overflow-hidden">
                 <span className="[text-box:trim-both_cap_alphabetic] text-sm">
                     生成履歴
                 </span>
