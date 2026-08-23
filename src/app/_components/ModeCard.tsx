@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { nanoid } from "nanoid";
 import { cn } from "@/lib/utils";
+import ControlKnobsIcon from "@/components/icons/ControlKnobsIcon";
+import PuzzlePieceIcon from "@/components/icons/PuzzlePieceIcon";
+import SparklesIcon from "@/components/icons/SparklesIcon";
+import ThoughtBalloonIcon from "@/components/icons/ThoughtBalloonIcon";
 
 type ModeCardProps = {
     modeInfo: {
@@ -13,8 +17,16 @@ type ModeCardProps = {
     },
 };
 
+const MODE_ICONS = {
+    auto: SparklesIcon,
+    impression: ThoughtBalloonIcon,
+    condition: ControlKnobsIcon,
+    remaining: PuzzlePieceIcon,
+} as const;
+
 export default function ModeCard({ modeInfo }: ModeCardProps) {
     const router = useRouter();
+    const Icon = MODE_ICONS[modeInfo.id as keyof typeof MODE_ICONS];
 
     const handleNavigate = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -44,7 +56,12 @@ export default function ModeCard({ modeInfo }: ModeCardProps) {
                 "bg-sky-100 flex h-55 items-center justify-center rounded-t-3xl w-full",
                 "lg:h-25 lg:rounded lg:shrink-0 lg:w-25",
             )}>
-                {/* ロゴ */}
+                {Icon && (
+                    <Icon className={cn(
+                        "h-30",
+                        "lg:h-14",
+                    )} />
+                )}
             </div>
             <div className={cn(
                 "flex flex-col gap-5.5 pb-3 pt-6 px-3 w-full",
