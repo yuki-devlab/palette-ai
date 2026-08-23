@@ -84,6 +84,7 @@ export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: A
                 <div className="flex items-center gap-1 text-slate-500 text-sm">
                     <Link
                         href="/faq"
+                        onNavigate={onClose}
                         className={cn(
                             "[text-box:trim-both_cap_alphabetic] transition-colors",
                             "hover:text-slate-800"
@@ -96,6 +97,7 @@ export default function AccountSettingsModal({ isOpen, onClose, user, isPro }: A
                     </span>
                     <Link
                         href="/contact"
+                        onNavigate={onClose}
                         className={cn(
                             "[text-box:trim-both_cap_alphabetic] transition-colors",
                             "hover:text-slate-800"

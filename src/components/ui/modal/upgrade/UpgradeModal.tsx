@@ -83,6 +83,7 @@ export default function UpgradeModal({ isOpen, onClose, isPro }: UpgradeModalPro
                 />
                 <Link
                     href="/commercial-transactions"
+                    onNavigate={onClose}
                     className={cn(
                         "text-sm [text-box:trim-both_cap_alphabetic] text-slate-500 transition-colors",
                         "hover:text-slate-800",
