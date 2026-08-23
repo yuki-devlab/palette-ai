@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { nanoid } from "nanoid";
-import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { nanoid } from "nanoid";
+import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
+import { cn } from "@/lib/utils";
 import ColorSchemeItem from "@/app/generate/remaining/_components/ColorSchemeItem";
 
 const colorInfoList = [
@@ -90,13 +91,16 @@ export default function RemainingClient() {
     };
 
     return (
-        <div className={`
-            flex flex-col gap-16 justify-center mx-auto px-4 w-full h-full
-            md:w-fit
-        `}>
+        <div className={cn(
+            "flex flex-col gap-16 justify-center mx-auto px-4 w-full",
+            "md:w-fit",
+        )}>
             <Link
                 href="/"
-                className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
+                className={cn(
+                    "bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 transition-colors",
+                    "hover:bg-slate-400",
+                )}
             >
                 <ArrowLeftAltW700
                     size={24}
@@ -105,10 +109,10 @@ export default function RemainingClient() {
             </Link>
             <div className="flex flex-col gap-10">
                 <div className="flex flex-col gap-8 text-center">
-                    <h2 className={`
-                        font-bold text-[22px] [text-box:trim-both_cap_alphabetic]
-                        md:text-2xl
-                    `}>
+                    <h2 className={cn(
+                        "font-bold text-[22px] [text-box:trim-both_cap_alphabetic]",
+                        "md:text-2xl",
+                    )}>
                         決まっている色から残りを自動生成
                     </h2>
                     <div className="bg-white drop-shadow p-7 relative rounded-lg">
@@ -137,9 +141,12 @@ export default function RemainingClient() {
                 </dl>
                 <button
                     type="button"
-                    className="bg-sky-500 py-4.5 relative rounded-full disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500"
                     onClick={handleNavigate}
                     disabled={!isReady()}
+                    className={cn(
+                        "bg-sky-500 py-4.5 relative rounded-full transition-all",
+                        "disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500",
+                    )}
                 >
                     <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
                         生成

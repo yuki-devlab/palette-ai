@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { nanoid } from "nanoid";
-import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { nanoid } from "nanoid";
+import { ArrowLeftAlt as ArrowLeftAltW700, ArrowRightAlt as ArrowRightAltW700 } from "@material-symbols-svg/react/w700";
+import { cn } from "@/lib/utils";
 
 export default function ConditionClient() {
     const [inputText, setInputText] = useState("");
@@ -32,13 +33,16 @@ export default function ConditionClient() {
     };
 
     return (
-        <div className={`
-            flex flex-col gap-16 justify-center flex-1 mx-auto px-4 w-full max-w-xl
-            md:w-fit
-        `}>
+        <div className={cn(
+            "flex flex-col gap-16 justify-center flex-1 mx-auto px-4 w-full max-w-xl",
+            "md:w-fit",
+        )}>
             <Link
                 href="/"
-                className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
+                className={cn(
+                    "bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 transition-colors",
+                    "hover:bg-slate-400",
+                )}
             >
                 <ArrowLeftAltW700
                     size={24}
@@ -68,16 +72,20 @@ export default function ConditionClient() {
                             handleNavigate();
                         }
                     }}
-                    className={`
-                        bg-slate-200 border border-slate-400 p-5 rounded-lg text-sm w-full focus:border-slate-800 focus:outline-none
-                        md:px-6
-                    `}
+                    className={cn(
+                        "bg-slate-200 border border-slate-400 p-5 rounded-lg text-sm w-full",
+                        "focus:border-slate-800 focus:outline-none",
+                        "md:px-6",
+                    )}
                 />
                 <button
                     type="button"
-                    className="bg-sky-500 py-4.5 relative rounded-full disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500"
                     onClick={handleNavigate}
                     disabled={!inputText.trim()}
+                    className={cn(
+                        "bg-sky-500 py-4.5 relative rounded-full transition-all",
+                        "disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500",
+                    )}
                 >
                     <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
                         生成

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { notFound, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { cn } from "@/lib/utils";
 import { generateColor } from "@/actions/generate-color";
 import { getHistory } from "@/actions/get-history";
 import ResultContent from "@/components/result/ResultContent";
@@ -145,7 +146,10 @@ export default function ResultClient() {
     }
 
     return (
-        <div className="flex flex-col gap-6 justify-center mx-auto w-full max-w-5xl py-10 px-4 md:px-10">
+        <div className={cn(
+            "flex flex-col gap-6 justify-center mx-auto w-full max-w-5xl px-4",
+            "md:px-10",
+        )}>
             <ResultHeader
                 mode={mode}
                 status={status}

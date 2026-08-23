@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ArrowLeftAlt as ArrowLeftAltW700 } from "@material-symbols-svg/react/w700";
 import { Check as CheckW700 } from "@material-symbols-svg/react/w700";
 import { ErrorFill } from "@material-symbols-svg/react";
-import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 type ResultHeaderProps = {
     mode: string | null;
@@ -85,8 +86,11 @@ export default function ResultHeader({ mode, status, isLogin }: ResultHeaderProp
         <div className="flex items-end justify-between">
             <button
                 type="button"
-                className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
                 onClick={handleNavigate}
+                className={cn(
+                    "bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 transition-colors",
+                    "hover:bg-slate-400",
+                )}
             >
                 <ArrowLeftAltW700
                     size={24}

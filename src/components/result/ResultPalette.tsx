@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Refresh as RefreshW700 } from "@material-symbols-svg/react/w700";
+import { cn } from "@/lib/utils";
 import ColorSchemeItem from "@/components/result/ColorSchemeItem";
 
 type ColorSchemeProps = {
@@ -60,10 +61,10 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
     };
 
     return (
-        <div className={`
-            flex flex-col gap-8 items-center w-full
-            lg:w-md
-        `}>
+        <div className={cn(
+            "flex flex-col gap-8 items-center w-full",
+            "lg:w-md",
+        )}>
             <div className="flex gap-4 items-end">
                 <span className="bg-sky-500 h-6 origin-bottom -rotate-45 w-0.75" />
                 <h2 className="font-bold text-2xl [text-box:trim-both_cap_alphabetic]">
@@ -78,10 +79,10 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
                 <br />
                 また、好きな色だけを固定して、それ以外の色を再生成することも可能です。
             </p>
-            <dl className={`
-                gap-x-10 gap-y-5 grid grid-cols-1 items-center w-full
-                md:grid-cols-[auto_auto]
-            `}>
+            <dl className={cn(
+                "gap-x-10 gap-y-5 grid grid-cols-1 items-center w-full",
+                "md:grid-cols-[auto_auto]",
+            )}>
                 {colorInfoList.map((colorInfo) => {
                     const isThisLocked = isLocked[colorInfo.id];
                     const isItemLoading = isLoading && !isThisLocked;
@@ -101,16 +102,17 @@ export default function ResultPalette({ colorScheme, onRegenerate, isRegeneratin
             </dl>
             <button
                 type="button"
-                className={`
-                    bg-sky-500 flex gap-2 h-15 items-center justify-center rounded-lg w-full disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500
-                    ${isRegenerating && "gap-2.5"}
-                `}
                 onClick={() => {
                     if (isRegenerating || isLoading) return;
                     
                     onRegenerate(isLocked);
                 }}
                 disabled={isRegenerating || isLoading}
+                className={cn(
+                    "bg-sky-500 flex gap-2 h-15 items-center justify-center rounded-lg w-full transition-all",
+                    "disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500",
+                    isRegenerating && "gap-2.5",
+                )}
             >
                 {isRegenerating ? (
                     <div className="animate-spin border-3 border-t-white border-white/25 h-4.5 rounded-full w-4.5" />

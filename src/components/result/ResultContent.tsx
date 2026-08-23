@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import ResultPalette from "@/components/result/ResultPalette";
 import ResultPreview from "@/components/result/ResultPreview";
 
@@ -23,10 +24,10 @@ type ResultContentProps = {
 
 export default function ResultContent({ colorScheme, onRegenerate, isRegenerating, isLoading, initialLocked }: ResultContentProps) {
     return (
-        <div className={`
-            bg-white flex gap-10 px-6 py-10 rounded-2xl shadow flex-col w-full
-            lg:flex-row lg:min-w-0 lg:p-10
-        `}>
+        <div className={cn(
+            "bg-white flex gap-10 px-6 py-10 rounded-2xl shadow flex-col w-full",
+            "lg:flex-row lg:min-w-0 lg:p-10",
+        )}>
             <ResultPalette
                 colorScheme={colorScheme}
                 onRegenerate={onRegenerate}
@@ -40,7 +41,7 @@ export default function ResultContent({ colorScheme, onRegenerate, isRegeneratin
                     backgroundSize: "1px 12px",
                     backgroundRepeat: "repeat-y",
                 }}
-                className="w-px "
+                className="w-px"
             />
             <ResultPreview
                 colorScheme={colorScheme}

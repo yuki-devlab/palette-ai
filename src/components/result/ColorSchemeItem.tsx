@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, ContentCopy, LockOpen, LockFill } from "@material-symbols-svg/react";
+import { cn } from "@/lib/utils";
 
 type ColorSchemeItemProps = {
     title: string;
@@ -43,10 +44,10 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
     }
 
     return (
-        <div className={`
-            flex flex-col gap-5
-            md:contents
-        `}>
+        <div className={cn(
+            "flex flex-col gap-5",
+            "md:contents",
+        )}>
             <div className="flex flex-col gap-4 whitespace-nowrap">
                 <dt className="font-bold [text-box:trim-both_cap_alphabetic] text-sm">
                     {title}
@@ -57,26 +58,20 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
             </div>
             <div
                 style={isLoading ? undefined : { backgroundColor: color }}
-                className={`
-                    border border-slate-300 flex items-center justify-between p-5 rounded w-full
-                    md:w-64
-                    ${isLoading ? "animate-pulse bg-slate-300" : ""}
-                `}
+                className={cn(
+                    "border border-slate-300 flex items-center justify-between px-3 rounded-xl w-full h-15",
+                    isLoading ? "animate-pulse bg-slate-300" : "",
+                    "md:w-64",
+                )}
             >
                 <button
                     type="button"
-                    className={`
-                        ${
-                            isDark(color) ? (
-                                "text-white/50 hover:text-white/75"
-                            ) : (
-                                "text-slate-800/50 hover:text-slate-800/75"
-                            )
-                        }
-                        ${isLoading ? "invisible": ""}
-                    `}
                     onClick={onToggleLock}
                     disabled={isLoading}
+                    className={cn(
+                        isDark(color) ? "text-white/50 hover:text-white/75 w-8 h-8 flex items-center justify-center transition-colors" : "text-slate-800/50 hover:text-slate-800/75 w-8 h-8 flex items-center justify-center transition-colors",
+                        isLoading ? "invisible" : "",
+                    )}
                 >
                     {isLocked ? (
                         <LockFill size={16} />
@@ -84,27 +79,21 @@ export default function ColorSchemeItem({ title, description, color, isLocked, o
                         <LockOpen size={16} />
                     )}
                 </button>
-                <span className={`
-                    [text-box:trim-both_cap_alphabetic] text-sm
-                    ${isDark(color) ? "text-white" : "text-slate-800"}
-                    ${isLoading ? "invisible" : ""}
-                `}>
+                <span className={cn(
+                    "[text-box:trim-both_cap_alphabetic] text-sm",
+                    isDark(color) ? "text-white" : "text-slate-800",
+                    isLoading ? "invisible" : "",
+                )}>
                     {color}
                 </span>
                 <button
                     type="button"
-                    className={`
-                        ${
-                            isDark(color) ? (
-                                "text-white/50 hover:text-white/75"
-                            ) : (
-                                "text-slate-800/50 hover:text-slate-800/75"
-                            )
-                        }
-                        ${isLoading ? "invisible" : ""}
-                    `}
                     onClick={handleCopy}
                     disabled={isLoading}
+                    className={cn(
+                        isDark(color) ? "text-white/50 hover:text-white/75 w-8 h-8 flex items-center justify-center transition-colors" : "text-slate-800/50 hover:text-slate-800/75 w-8 h-8 flex items-center justify-center transition-colors",
+                        isLoading ? "invisible" : "",
+                    )}
                 >
                     {isCopied ? (
                         <Check size={16} />

@@ -9,6 +9,7 @@ import {
     ArrowRightAlt as ArrowRightAltW700,
     Check as CheckW700,
 } from "@material-symbols-svg/react/w700";
+import { cn } from "@/lib/utils";
 
 const impressions = [
     "愛情", "興奮", "生命力", "安心", "伝統",
@@ -45,14 +46,17 @@ export default function ImpressionClient() {
     };
 
     return (
-        <div className={`
-            flex flex-col gap-10 justify-center flex-1 mx-auto px-4 py-10 max-w-2xl
-            md:gap-16 md:py-0 md:w-fit
-        `}>
+        <div className={cn(
+            "flex flex-col gap-10 justify-center flex-1 mx-auto px-5 max-w-2xl",
+            "md:gap-16 md:w-fit",
+        )}>
             <div className="flex items-center justify-between">
                 <Link
                     href="/"
-                    className="bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 hover:bg-slate-400"
+                    className={cn(
+                        "bg-slate-300 flex h-10 items-center justify-center rounded-full w-10 transition-colors",
+                        "hover:bg-slate-400",
+                    )}
                 >
                     <ArrowLeftAltW700
                         size={24}
@@ -77,10 +81,10 @@ export default function ImpressionClient() {
                         <div className="absolute bg-white -bottom-2.5 h-5 left-1/2 rotate-45 rounded-br -translate-x-1/2 w-5" />
                     </div>
                 </div>
-                <div className={`
-                    gap-7 grid grid-cols-3
-                    md:grid-cols-5
-                `}>
+                <div className={cn(
+                    "gap-7 grid grid-cols-3",
+                    "md:grid-cols-5",
+                )}>
                     {impressions.map((impression) => {
                         const isChecked = selected.includes(impression);
 
@@ -94,12 +98,18 @@ export default function ImpressionClient() {
                                         type="checkbox"
                                         checked={isChecked}
                                         onChange={() => handleToggle(impression)}
-                                        className="appearance-none bg-white border border-sky-500 h-4 peer rounded w-4 checked:bg-sky-500"
+                                        className={cn(
+                                            "appearance-none bg-white border border-sky-500 h-4 peer rounded w-4",
+                                            "checked:bg-sky-500",
+                                        )}
                                     />
                                     <CheckW700
                                         size={14}
                                         color="var(--color-white)"
-                                        className="absolute hidden peer-checked:block"
+                                        className={cn(
+                                            "absolute hidden",
+                                            "peer-checked:block",
+                                        )}
                                     />
                                 </span>
                                 <span className="[text-box:trim-both_cap_alphabetic] text-sm">
@@ -111,9 +121,12 @@ export default function ImpressionClient() {
                 </div>
                 <button
                     type="button"
-                    className="bg-sky-500 py-4.5 relative rounded-full disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500"
                     onClick={handleNavigate}
                     disabled={selected.length === 0}
+                    className={cn(
+                        "bg-sky-500 py-4.5 relative rounded-full transition-all",
+                        "disabled:cursor-not-allowed disabled:opacity-50 hover:enabled:bg-blue-500",
+                    )}
                 >
                     <span className="font-bold [text-box:trim-both_cap_alphabetic] text-white">
                         生成

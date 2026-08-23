@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import ImpressionClient from "@/app/generate/impression/_components/ImpressionPageClient";
+import ImpressionPageClient from "@/app/generate/impression/_components/ImpressionPageClient";
 
 export const metadata = createMetadata({
     title: "与えたい印象から自動生成",
@@ -9,6 +9,6 @@ export const metadata = createMetadata({
 
 export default function ImpressionPage() {
     return (
-        <ImpressionClient />
+        <ImpressionPageClient />
     );
 }
