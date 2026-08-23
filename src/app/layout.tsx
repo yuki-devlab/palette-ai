@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { SessionProvider } from "next-auth/react";
 import { inter, notoSansJP } from "@/app/fonts";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,8 @@ import Sidebar from "@/components/layout/sidebar/Sidebar";
 type RootLayoutProps = {
     children: React.ReactNode;
 };
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const viewport: Viewport = {
     themeColor: "#DFF2FE",
@@ -62,6 +65,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                     <div id="portal" />
                 </SessionProvider>
             </body>
+            {gaId && <GoogleAnalytics gaId={gaId} />}
         </html>
     );
 }
